@@ -1,0 +1,177 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Algrebra Lineal y Optimización",
+    "section": "",
+    "text": "Este book contiene los apuntes personales del curso Algrebra lineal y optimización, del Master of Data Science, dela Universidad Aldolfo Ibáñez 2022.\n\n\nFamiliarizarse con conceptos de Álgebra Lineal y Optimización, y su uso en Data Science\n\n\n\n\n\n\nVectores, matrices, valores propios, descomposiciones,…\nSistemas de ecuaciones lineales, regresión, PageRank, reducción de dimensionalidad, compresión,…\n\n\n\n\n\nOptimización lineal y convexa, multiplicadores de Lagrange, descenso por el gradiente, …\nRegresión, SVM, redes neuronales,\n\n\n\n\n\nVideos: Esencia del Álgebra Lineal - 3Blue1Brown Español"
+  },
+  {
+    "objectID": "vectores.html",
+    "href": "vectores.html",
+    "title": "1  Vectores",
+    "section": "",
+    "text": "Vectores:\n\nUn vector es un arreglo unidimensional de números reales\n\n\nSu notación según nos convenga, escribiremos el vector como una fila o una columna.\n\n\n\nNotación de Vectores\n\n\nCuando trabajamos con vectores de dimensión n decimos que estamos en el espacio vectorial \\mathbb{R}^n"
+  },
+  {
+    "objectID": "vectores.html#operaciones-de-suma-sobre-vectores",
+    "href": "vectores.html#operaciones-de-suma-sobre-vectores",
+    "title": "1  Vectores",
+    "section": "1.2 Operaciones de Suma sobre Vectores",
+    "text": "1.2 Operaciones de Suma sobre Vectores\n\n\n\nSuma de Vectores\n\n\n\n1.2.1 Geométricamente\n  \n\n\n1.2.2 Propiedades\n\n\n\n\n\n\nAsociatividad:\n\n\n\n\\bar{x}  + (\\bar{y}  + \\bar{z}) = (\\bar{x}  + \\bar{y}  ) + \\bar{z}\n\n\n\n\n\n\n\n\nConmutatividad:\n\n\n\n\\bar{x} + \\bar{y} = \\bar{y}  +\\bar{x}\n\n\n\n\n\n\n\n\nElemento Neutro:\n\n\n\nElemento Neutro: existe un elemento neutro \\bar{0} tal que \\bar{x} + \\bar{0} = \\bar{x} para todo \\bar{c} \\in \\mathbb{R}^n\nEn nuestro caso \\bar{0} es el vector:\n\\bar{0}= \\begin{bmatrix}\n0\\\\ \\vdots  \n\\\\0\n\\end{bmatrix}"
+  },
+  {
+    "objectID": "vectores.html#operación-de-ponderación-de-vectores",
+    "href": "vectores.html#operación-de-ponderación-de-vectores",
+    "title": "1  Vectores",
+    "section": "1.3 Operación de Ponderación de Vectores",
+    "text": "1.3 Operación de Ponderación de Vectores\n\n\n\nPonderación de Vectores\n\n\n\n1.3.1 Geométricamente\n  \n\n\n1.3.2 Propiedades de Ponderación de Vectores\n\n\n\n\n\n\nDistributividad::\n\n\n\n\\alpha ( \\bar{x} +\\bar{y}) = \\alpha \\bar{x} + \\alpha \\bar{y} \\\\\n(\\alpha + \\beta) \\bar{x} = \\alpha \\bar{x} + \\beta \\bar{x}\n\n\n\n\n\n\n\n\nElemento Neutro::\n\n\n\n1\\bar{x}=\\bar{x}\n\n\n\n\n\n\n\n\nCompatibilidad::\n\n\n\n(\\alpha + \\beta) \\bar{x} = \\alpha (\\beta \\bar{x})\n\n\n\n\n\n\n\n\nObservaciones:\n\n\n\n\nPara todo \\bar{x} \\in \\mathbb{R}^n, el vector −1\\bar{x} lo escribimos como \\bar{x}. Ahora podemos hablar de la “resta”:\n\n\\bar{x} − \\bar{y} = \\bar{x} + (\\bar{y})\n\nPara todo \\bar{x} \\in \\mathbb{R}^n, tenemos \\bar{x}-\\bar{x} =\\bar{0}\n0\\bar{x} = \\bar{0} para todo \\bar{x} \\in \\mathbb{R}^n"
+  },
+  {
+    "objectID": "vectores.html#norma",
+    "href": "vectores.html#norma",
+    "title": "1  Vectores",
+    "section": "1.4 Norma",
+    "text": "1.4 Norma\n\n\n\nLa norma de un vector\n\n\n\\|\\bar{x}\\| \\sqrt{x_1^2+\\cdot\\cdot\\cdot+x_n^2}\n\n\n\n\n\n\nDesigualdad Triangular:\n\n\n\n\\|\\bar{x} + \\bar{y}\\| \\leq \\|\\bar{x} \\|+ \\|\\bar{y}\\| \n\n\n\n\n\n\n\n\n\nNote\n\n\n\n \\|\\alpha \\bar{x}\\| = |\\alpha |\\cdot\\|\\bar{x}\\|\n \\|\\bar{x} \\| = 0\\Leftrightarrow \\bar{x}= \\bar{0}"
+  },
+  {
+    "objectID": "vectores.html#distancia-mathbbrn",
+    "href": "vectores.html#distancia-mathbbrn",
+    "title": "1  Vectores",
+    "section": "1.5 Distancia \\mathbb{R}^n",
+    "text": "1.5 Distancia \\mathbb{R}^n\nLa norma nos permite definir la distancia entre vectores en \\mathbb{R}^n\nLa distancia entre \\bar{x} e \\bar{y} = \\|\\bar{x}-\\bar{y}\\|\n\n\n\nLa distancia entre \\bar{x} e \\bar{y}"
+  },
+  {
+    "objectID": "vectores.html#producto-punto-o-interno",
+    "href": "vectores.html#producto-punto-o-interno",
+    "title": "1  Vectores",
+    "section": "1.6 Producto punto o interno",
+    "text": "1.6 Producto punto o interno\n\n\n\nProducto punto o interno"
+  },
+  {
+    "objectID": "vectores.html#ortogonalidad",
+    "href": "vectores.html#ortogonalidad",
+    "title": "1  Vectores",
+    "section": "1.7 Ortogonalidad",
+    "text": "1.7 Ortogonalidad\nLos vectores \\bar{x} e \\bar{y} en \\mathbb{R}^n son ortogonales si \\bar{x} \\cdot\\bar{y}=0\n\n\n\nOrtogonalidad de Vectores cuando \\bar{x} \\cdot\\bar{y}=0"
+  },
+  {
+    "objectID": "vectores.html#subespacios-vectoriales",
+    "href": "vectores.html#subespacios-vectoriales",
+    "title": "1  Vectores",
+    "section": "1.8 Subespacios Vectoriales",
+    "text": "1.8 Subespacios Vectoriales\nUn conjunto de vectores S \\subseteq \\mathbb{R}^n es un subespacio vectorial de \\mathbb{R}^n si:\n\n\n1.8.1 Ejeplos de subespacios vectoriales"
+  },
+  {
+    "objectID": "vectores.html#combinaciones-lineales",
+    "href": "vectores.html#combinaciones-lineales",
+    "title": "1  Vectores",
+    "section": "1.9 Combinaciones Lineales",
+    "text": "1.9 Combinaciones Lineales\nUna combinación lineal de vectores \\bar{x}_1, ..., \\bar{x}_m\\in \\mathbb{R}^n es un vector en la forma:\n\\alpha_1\\bar{x}_1+ \\cdot\\cdot\\cdot +\\alpha_m\\bar{x}_m\nDonde \\alpha_1+ \\cdot\\cdot\\cdot +\\alpha_m \\in \\mathbb{R}\n\nEjemplos de Combinación lineal"
+  },
+  {
+    "objectID": "vectores.html#espacio-generado-span",
+    "href": "vectores.html#espacio-generado-span",
+    "title": "1  Vectores",
+    "section": "1.10 Espacio generado (span)",
+    "text": "1.10 Espacio generado (span)\nEl espacio generado por vectores \\bar{x}_1, ..., \\bar{x}_m\\in \\mathbb{R}^n es el conjunto de todas las combinaciones lineales de \\bar{x}_1, ..., \\bar{x}_m\nEn símbolos:\nspan(\\bar{x}_1, ..., \\bar{x}_m)=\\{\\alpha_1\\bar{x}_1+ \\cdot\\cdot\\cdot +\\alpha_m\\bar{x}_m \\ |\\  \\alpha_1, ...,\\alpha_{m} \\in \\mathbb{R}\\}\n\n\n\n\n\n\nObservación:\n\n\n\nspan(\\bar{x}_1, ..., \\bar{x}_m) siempre es un subespacio vectorial de \\mathbb{R}^n"
+  },
+  {
+    "objectID": "vectores.html#independencia-lineal",
+    "href": "vectores.html#independencia-lineal",
+    "title": "1  Vectores",
+    "section": "1.11 Independencia lineal",
+    "text": "1.11 Independencia lineal"
+  },
+  {
+    "objectID": "vectores.html#bases",
+    "href": "vectores.html#bases",
+    "title": "1  Vectores",
+    "section": "1.12 Bases",
+    "text": "1.12 Bases\n\nEjemplos de Base:\n\n\n1.12.1 Bases y Dimensión\nDos propiedades claves acerca de bases:\n\n\n\n\n\n\nTerorema:\n\n\n\n\nTodo subespacio vectorial S de \\mathbb{R}^n tiene una base\nTodas las bases de un subespacio vectorial S de \\mathbb{R}^n tienen el mismo tamaño\n\n\n\nLa última proposición nos permite definir la dimensión de un subespacio vectorial S de \\mathbb{R}^n como el tamaño de sus bases.\n\n\n\n\n\n\nObservación\n\n\n\n\nLa dimensión de S = \\{\\bar{0}\\} es 0 y la dimensión de S = \\mathbb{R}^n es n\n\n\n\n\n\n1.12.2 Bases como sistemas de coordenadas\nDebido a la siguiente proposición, una base siempre provee un sistema de coordenadas para el espacio.\n\n\n\n\n\n\nProposición:\n\n\n\nSi B es una base para un subespacio vectorial S de \\mathbb{R}^n , entonces todo vector \\bar{x}\\in S se puede escribir de manera única como una combinación lineal de los vectores de B\n\n\n\n\n\n1.12.3 Bases ortonormales\nUna base ortonormal B de un subespacio vectorial S de \\mathbb{R}^n es una base de S que satisface:\n\nLos vectores en B son ortogonales entre sí (par a par)\nLa norma de cada vector en B es 1\n\nEl “cambio de coordenada” a una base ortonormal es mucho más simple:\n\nUna propiedad clave es la siguiente:\n\n\n\n\n\n\nTerorema:\n\n\n\nTodo subespacio vectorial S de \\mathbb{R}^n tiene una base ortonormal\n\n\nDe hecho, existe un procedimiento para transformar una base arbitraria a otra base ortonormal de manera que el span es el mismo (proceso de Gram-Schmidt)\n\n\n1.12.4 Bases Canónicas\n\n\nDe hecho, son ortogonales y tienen norma 1 * La base canónica es una base ortonormal"
+  },
+  {
+    "objectID": "vectores.html#referencias-del-cápitulo",
+    "href": "vectores.html#referencias-del-cápitulo",
+    "title": "1  Vectores",
+    "section": "1.13 Referencias del Cápitulo",
+    "text": "1.13 Referencias del Cápitulo"
+  },
+  {
+    "objectID": "matrices.html",
+    "href": "matrices.html",
+    "title": "2  Matrices",
+    "section": "",
+    "text": "Una matriz es un arreglo bidimensional de números reales\n\nDecimos que la matriz es de n \\times m si el número de filas es n y el número de columnas es m\n Si n = m decimos que la matriz es cuadrada\nNotación:\nSi A es una matriz, entonces:\n\nA_{i,j}denota la entrada en la fila i-ésima y columna j-ésima de A\nA_{i,*}denota la fila i-ésima de A (como vector)\nA_{*,j}denota la columna j-ésima de A (como vector)\n\n\nRecuerde: Escribimos un vector como fila o columna según nos convenga"
+  },
+  {
+    "objectID": "matrices.html#suma-de-matrices",
+    "href": "matrices.html#suma-de-matrices",
+    "title": "2  Matrices",
+    "section": "2.2 Suma de matrices",
+    "text": "2.2 Suma de matrices\n\n\n\n\n\n\n\nPropiedades:\n\n\n\n\nAsociatividad: $A + (B + C) = (A + B) + C $\nConmutatividad: A + B = B + A\nElemento neutro e inversos"
+  },
+  {
+    "objectID": "matrices.html#ponderación-de-matrices",
+    "href": "matrices.html#ponderación-de-matrices",
+    "title": "2  Matrices",
+    "section": "2.3 Ponderación de Matrices",
+    "text": "2.3 Ponderación de Matrices\n\n\n\n\n\n\nPropiedades:\n\n\n\n\nDistributividad:\n\n\\gamma(A + B) = \\gamma A + \\gamma B\\\\ (\\gamma + \\delta)A = \\gamma A + \\delta A\n\nCompatibilidad:\n\n(\\gamma\\delta)A = \\gamma(\\delta A)"
+  },
+  {
+    "objectID": "matrices.html#multiplicación-matriz-vector",
+    "href": "matrices.html#multiplicación-matriz-vector",
+    "title": "2  Matrices",
+    "section": "2.4 Multiplicación matriz-vector",
+    "text": "2.4 Multiplicación matriz-vector\n \nEs útil visualizar el producto matriz-vector (por la derecha) como una combinación lineal:\n\nEs decir: A\\bar{x} es la combinación lineal de las columnas de A según los ponderadores en \\bar{x}\n\nLo mismo para el producto matrix-vector por la izquierda:\n\nEs decir: \\bar{x}A es la combinación lineal de las filas de A según los ponderadores en \\bar{x}"
+  },
+  {
+    "objectID": "matrices.html#multiplicación-matriz-matriz",
+    "href": "matrices.html#multiplicación-matriz-matriz",
+    "title": "2  Matrices",
+    "section": "2.5 Multiplicación matriz-matriz",
+    "text": "2.5 Multiplicación matriz-matriz\n\nEs decir:\n(AB)_{i,j} es el producto punto entre la fila i-ésima de A y la columna j-ésima de B\nTambién podemos ver el producto matriz-matriz como varios productos matriz-vector:"
+  },
+  {
+    "objectID": "matrices.html#producto-externo",
+    "href": "matrices.html#producto-externo",
+    "title": "2  Matrices",
+    "section": "2.6 Producto Externo",
+    "text": "2.6 Producto Externo\n\nEs decir, \\bar{x} \\otimes \\bar{y} es la matriz de n × m que satisface (\\bar{x}\\otimes\\bar{y}_{i,j} = x_iy_j\n\n\n\n\n\n\n\nPropiedades:\n\n\n\n\n\n\nPodemos ver el producto matriz-matriz en función de productos externos:\n \n\n\n\n\n\n\nPropiedades Multiplicación Matriz-Matriz:"
+  },
+  {
+    "objectID": "matrices.html#matrices-como-transformaciones-lineales",
+    "href": "matrices.html#matrices-como-transformaciones-lineales",
+    "title": "2  Matrices",
+    "section": "2.7 Matrices como transformaciones lineales",
+    "text": "2.7 Matrices como transformaciones lineales\n\nDos espacios fundamentales\n   \nDos Espacios fundamentales Ejemplos"
+  },
+  {
+    "objectID": "matrices.html#rango-y-nulidad",
+    "href": "matrices.html#rango-y-nulidad",
+    "title": "2  Matrices",
+    "section": "2.8 Rango y nulidad",
+    "text": "2.8 Rango y nulidad\nPara una matriz A de n × m definimos su rango y su nulidad como:\nrank(A) = dimensión de Col(A)\nnullity(A) = dimensión de Null(A)\nRango y nulidad\n   \n\n\n\n\n\n\nTeorema Rango Nulidad\n\n\n\nSea A una matriz de n \\times m. Tenemos que:\nrank(A) + nullity(A) = m\n\n\n\n\n\n\n\n\npropiedades del rango"
+  },
+  {
+    "objectID": "matrices.html#transpuesta",
+    "href": "matrices.html#transpuesta",
+    "title": "2  Matrices",
+    "section": "2.9 Transpuesta",
+    "text": "2.9 Transpuesta\n  \n\n2.9.1 Espacio fila\n \n\n\n2.9.2 Mas propiedades del Rango"
+  },
+  {
+    "objectID": "matrices.html#espacio-nulo-izquierdo",
+    "href": "matrices.html#espacio-nulo-izquierdo",
+    "title": "2  Matrices",
+    "section": "2.10 Espacio nulo izquierdo",
+    "text": "2.10 Espacio nulo izquierdo"
+  },
+  {
+    "objectID": "matrices.html#los-4-espacios-fundamentales",
+    "href": "matrices.html#los-4-espacios-fundamentales",
+    "title": "2  Matrices",
+    "section": "2.11 Los 4 espacios fundamentales",
+    "text": "2.11 Los 4 espacios fundamentales\n\n\n2.11.1 Espacios Ortogonales\n\nComplementos Ortogonales\n\n\n\n2.11.2 Inversa de una matriz\n\n¿Cuándo existe la inversa de una matriz?"
+  }
+]

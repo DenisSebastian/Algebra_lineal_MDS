@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Algrebra Lineal y Optimización - 1&nbsp; Vectores</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./matrices.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Algrebra Lineal y Optimización</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vectores.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#conceptos-generales" id="toc-conceptos-generales" class="nav-link active" data-scroll-target="#conceptos-generales"> <span class="header-section-number">1.1</span> Conceptos Generales</a></li>
+  <li><a href="#operaciones-de-suma-sobre-vectores" id="toc-operaciones-de-suma-sobre-vectores" class="nav-link" data-scroll-target="#operaciones-de-suma-sobre-vectores"> <span class="header-section-number">1.2</span> Operaciones de Suma sobre Vectores</a>
+  <ul class="collapse">
+  <li><a href="#geométricamente" id="toc-geométricamente" class="nav-link" data-scroll-target="#geométricamente"> <span class="header-section-number">1.2.1</span> Geométricamente</a></li>
+  <li><a href="#propiedades" id="toc-propiedades" class="nav-link" data-scroll-target="#propiedades"> <span class="header-section-number">1.2.2</span> Propiedades</a></li>
+  </ul></li>
+  <li><a href="#operación-de-ponderación-de-vectores" id="toc-operación-de-ponderación-de-vectores" class="nav-link" data-scroll-target="#operación-de-ponderación-de-vectores"> <span class="header-section-number">1.3</span> Operación de Ponderación de Vectores</a>
+  <ul class="collapse">
+  <li><a href="#geométricamente-1" id="toc-geométricamente-1" class="nav-link" data-scroll-target="#geométricamente-1"> <span class="header-section-number">1.3.1</span> Geométricamente</a></li>
+  <li><a href="#propiedades-de-ponderación-de-vectores" id="toc-propiedades-de-ponderación-de-vectores" class="nav-link" data-scroll-target="#propiedades-de-ponderación-de-vectores"> <span class="header-section-number">1.3.2</span> Propiedades de Ponderación de Vectores</a></li>
+  </ul></li>
+  <li><a href="#norma" id="toc-norma" class="nav-link" data-scroll-target="#norma"> <span class="header-section-number">1.4</span> Norma</a></li>
+  <li><a href="#distancia-mathbbrn" id="toc-distancia-mathbbrn" class="nav-link" data-scroll-target="#distancia-mathbbrn"> <span class="header-section-number">1.5</span> Distancia <span class="math inline">\mathbb{R}^n</span></a></li>
+  <li><a href="#producto-punto-o-interno" id="toc-producto-punto-o-interno" class="nav-link" data-scroll-target="#producto-punto-o-interno"> <span class="header-section-number">1.6</span> Producto punto o interno</a></li>
+  <li><a href="#ortogonalidad" id="toc-ortogonalidad" class="nav-link" data-scroll-target="#ortogonalidad"> <span class="header-section-number">1.7</span> Ortogonalidad</a></li>
+  <li><a href="#subespacios-vectoriales" id="toc-subespacios-vectoriales" class="nav-link" data-scroll-target="#subespacios-vectoriales"> <span class="header-section-number">1.8</span> Subespacios Vectoriales</a>
+  <ul class="collapse">
+  <li><a href="#ejeplos-de-subespacios-vectoriales" id="toc-ejeplos-de-subespacios-vectoriales" class="nav-link" data-scroll-target="#ejeplos-de-subespacios-vectoriales"> <span class="header-section-number">1.8.1</span> Ejeplos de subespacios vectoriales</a></li>
+  </ul></li>
+  <li><a href="#combinaciones-lineales" id="toc-combinaciones-lineales" class="nav-link" data-scroll-target="#combinaciones-lineales"> <span class="header-section-number">1.9</span> Combinaciones Lineales</a></li>
+  <li><a href="#espacio-generado-span" id="toc-espacio-generado-span" class="nav-link" data-scroll-target="#espacio-generado-span"> <span class="header-section-number">1.10</span> Espacio generado (span)</a></li>
+  <li><a href="#independencia-lineal" id="toc-independencia-lineal" class="nav-link" data-scroll-target="#independencia-lineal"> <span class="header-section-number">1.11</span> Independencia lineal</a></li>
+  <li><a href="#bases" id="toc-bases" class="nav-link" data-scroll-target="#bases"> <span class="header-section-number">1.12</span> Bases</a>
+  <ul class="collapse">
+  <li><a href="#bases-y-dimensión" id="toc-bases-y-dimensión" class="nav-link" data-scroll-target="#bases-y-dimensión"> <span class="header-section-number">1.12.1</span> Bases y Dimensión</a></li>
+  <li><a href="#bases-como-sistemas-de-coordenadas" id="toc-bases-como-sistemas-de-coordenadas" class="nav-link" data-scroll-target="#bases-como-sistemas-de-coordenadas"> <span class="header-section-number">1.12.2</span> Bases como sistemas de coordenadas</a></li>
+  <li><a href="#bases-ortonormales" id="toc-bases-ortonormales" class="nav-link" data-scroll-target="#bases-ortonormales"> <span class="header-section-number">1.12.3</span> Bases ortonormales</a></li>
+  <li><a href="#bases-canónicas" id="toc-bases-canónicas" class="nav-link" data-scroll-target="#bases-canónicas"> <span class="header-section-number">1.12.4</span> Bases Canónicas</a></li>
+  </ul></li>
+  <li><a href="#referencias-del-cápitulo" id="toc-referencias-del-cápitulo" class="nav-link" data-scroll-target="#referencias-del-cápitulo"> <span class="header-section-number">1.13</span> Referencias del Cápitulo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></h1>
+<p class="subtitle lead">Conceptos Básicos de Vectores</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="conceptos-generales" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="conceptos-generales"><span class="header-section-number">1.1</span> Conceptos Generales</h2>
+<dl>
+<dt>Vectores:</dt>
+<dd>
+Un vector es un arreglo unidimensional de números reales
+</dd>
+</dl>
+<p>Su notación según nos convenga, escribiremos el vector como una fila o una columna.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/nota_vectores.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Notación de Vectores</figcaption><p></p>
+</figure>
+</div>
+<p>Cuando trabajamos con vectores de dimensión <span class="math inline">n</span> decimos que estamos en el espacio vectorial <span class="math inline">\mathbb{R}^n</span></p>
+</section>
+<section id="operaciones-de-suma-sobre-vectores" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="operaciones-de-suma-sobre-vectores"><span class="header-section-number">1.2</span> Operaciones de Suma sobre Vectores</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/suma_vectores.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Suma de Vectores</figcaption><p></p>
+</figure>
+</div>
+<section id="geométricamente" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="geométricamente"><span class="header-section-number">1.2.1</span> Geométricamente</h3>
+<p><img src="images/suma_vectores_gra1.png" class="img-fluid" style="width:100.0%" alt="Suma de Vectores"> <img src="images/suma_vectores_gra2.png" class="img-fluid" style="width:100.0%" alt="Suma de Vectores"> <img src="images/suma_vectores_gra3.png" class="img-fluid" style="width:100.0%" alt="Suma de Vectores"></p>
+</section>
+<section id="propiedades" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="propiedades"><span class="header-section-number">1.2.2</span> Propiedades</h3>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Asociatividad:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\bar{x}  + (\bar{y}  + \bar{z}) = (\bar{x}  + \bar{y}  ) + \bar{z}</span></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Conmutatividad:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\bar{x} + \bar{y} = \bar{y}  +\bar{x}</span></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Elemento Neutro:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Elemento Neutro: existe un elemento neutro <span class="math inline">\bar{0}</span> tal que <span class="math inline">\bar{x}</span> + <span class="math inline">\bar{0}</span> = <span class="math inline">\bar{x}</span> para todo <span class="math inline">\bar{c}</span> <span class="math inline">\in \mathbb{R}^n</span></p>
+<p>En nuestro caso <span class="math inline">\bar{0}</span> es el vector:</p>
+<p><span class="math display">\bar{0}= \begin{bmatrix}
+0\\ \vdots  
+\\0
+\end{bmatrix}
+</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="operación-de-ponderación-de-vectores" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="operación-de-ponderación-de-vectores"><span class="header-section-number">1.3</span> Operación de Ponderación de Vectores</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/ponderacion_vectores.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ponderación de Vectores</figcaption><p></p>
+</figure>
+</div>
+<section id="geométricamente-1" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="geométricamente-1"><span class="header-section-number">1.3.1</span> Geométricamente</h3>
+<p><img src="images/pond_vectores_gra1.png" class="img-fluid" alt="Ponderación de Vectores geométricamente"> <img src="images/pond_vectores_gra2.png" class="img-fluid"> <img src="images/pond_vectores_gra3.png" class="img-fluid"></p>
+</section>
+<section id="propiedades-de-ponderación-de-vectores" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="propiedades-de-ponderación-de-vectores"><span class="header-section-number">1.3.2</span> Propiedades de Ponderación de Vectores</h3>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Distributividad::
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\alpha ( \bar{x} +\bar{y}) = \alpha \bar{x} + \alpha \bar{y} \\
+(\alpha + \beta) \bar{x} = \alpha \bar{x} + \beta \bar{x}</span></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Elemento Neutro::
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">1\bar{x}=\bar{x}</span></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Compatibilidad::
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">(\alpha + \beta) \bar{x} = \alpha (\beta \bar{x})</span></p>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Observaciones:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Para todo <span class="math inline">\bar{x} \in \mathbb{R}^n</span>, el vector <span class="math inline">−1\bar{x}</span> lo escribimos como <span class="math inline">\bar{x}</span>. Ahora podemos hablar de la <em>“resta”</em>:</li>
+</ul>
+<p><span class="math display">\bar{x} − \bar{y} = \bar{x} + (\bar{y})</span></p>
+<ul>
+<li>Para todo <span class="math inline">\bar{x} \in \mathbb{R}^n</span>, tenemos <span class="math inline">\bar{x}-\bar{x} =\bar{0}</span></li>
+<li><span class="math inline">0\bar{x} = \bar{0}</span> para todo <span class="math inline">\bar{x} \in \mathbb{R}^n</span></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="norma" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="norma"><span class="header-section-number">1.4</span> Norma</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/norma.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">La norma de un vector</figcaption><p></p>
+</figure>
+</div>
+<p><span class="math display">\|\bar{x}\| \sqrt{x_1^2+\cdot\cdot\cdot+x_n^2}</span></p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Desigualdad Triangular:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\|\bar{x} + \bar{y}\| \leq \|\bar{x} \|+ \|\bar{y}\| </span></p>
+<p><img src="images/des_triangular.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display"> \|\alpha \bar{x}\| = |\alpha |\cdot\|\bar{x}\|</span></p>
+<p><span class="math display"> \|\bar{x} \| = 0\Leftrightarrow \bar{x}= \bar{0}</span></p>
+</div>
+</div>
+</section>
+<section id="distancia-mathbbrn" class="level2 page-columns page-full" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="distancia-mathbbrn"><span class="header-section-number">1.5</span> Distancia <span class="math inline">\mathbb{R}^n</span></h2>
+<p>La norma nos permite definir la distancia entre vectores en <span class="math inline">\mathbb{R}^n</span></p>
+<p>La distancia entre <span class="math inline">\bar{x}</span> e <span class="math inline">\bar{y}</span> = <span class="math inline">\|\bar{x}-\bar{y}\|</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/distancia_r.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">La distancia entre <span class="math inline">\bar{x}</span> e <span class="math inline">\bar{y}</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="producto-punto-o-interno" class="level2 page-columns page-full" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="producto-punto-o-interno"><span class="header-section-number">1.6</span> Producto punto o interno</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/producto_punto.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Producto punto o interno</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="ortogonalidad" class="level2 page-columns page-full" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="ortogonalidad"><span class="header-section-number">1.7</span> Ortogonalidad</h2>
+<p>Los vectores <span class="math inline">\bar{x}</span> e <span class="math inline">\bar{y}</span> en <span class="math inline">\mathbb{R}^n</span> son ortogonales si <span class="math inline">\bar{x} \cdot\bar{y}=0</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/ortogonalidad.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ortogonalidad de Vectores cuando <span class="math inline">\bar{x} \cdot\bar{y}=0</span></figcaption><p></p>
+</figure>
+</div>
+<p><img src="images/cos_ortogonalidad.png" class="img-fluid" style="width:60.0%"></p>
+</section>
+<section id="subespacios-vectoriales" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="subespacios-vectoriales"><span class="header-section-number">1.8</span> Subespacios Vectoriales</h2>
+<p>Un conjunto de vectores <span class="math inline">S \subseteq \mathbb{R}^n</span> es un subespacio vectorial de <span class="math inline">\mathbb{R}^n</span> si:</p>
+<p><img src="images/subesp_vect.png" class="img-fluid" style="width:55.0%"></p>
+<section id="ejeplos-de-subespacios-vectoriales" class="level3" data-number="1.8.1">
+<h3 data-number="1.8.1" class="anchored" data-anchor-id="ejeplos-de-subespacios-vectoriales"><span class="header-section-number">1.8.1</span> Ejeplos de subespacios vectoriales</h3>
+<p><img src="images/ej_subespacios_vec1.png" class="img-fluid" style="width:80.0%"> <img src="images/ej_subespacios_vec2.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+</section>
+<section id="combinaciones-lineales" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="combinaciones-lineales"><span class="header-section-number">1.9</span> Combinaciones Lineales</h2>
+<p>Una combinación lineal de vectores <span class="math inline">\bar{x}_1, ..., \bar{x}_m\in \mathbb{R}^n</span> es un vector en la forma:</p>
+<p><span class="math display">\alpha_1\bar{x}_1+ \cdot\cdot\cdot +\alpha_m\bar{x}_m</span></p>
+<p>Donde <span class="math inline">\alpha_1+ \cdot\cdot\cdot +\alpha_m \in \mathbb{R}</span></p>
+<p><img src="images/comb_lineal_obs.png" class="img-fluid" style="width:60.0%"></p>
+<p>Ejemplos de Combinación lineal</p>
+<p><img src="images/ej_comb_lineales.png" class="img-fluid" style="width:80.0%"> <img src="images/ej_comb_lineales1.png" class="img-fluid" style="width:80.0%"> <img src="images/ej_comb_lineales2.png" class="img-fluid" style="width:80.0%"> <img src="images/ej_comb_lineales3.png" class="img-fluid" style="width:80.0%"></p>
+</section>
+<section id="espacio-generado-span" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="espacio-generado-span"><span class="header-section-number">1.10</span> Espacio generado (span)</h2>
+<p>El espacio generado por vectores <span class="math inline">\bar{x}_1, ..., \bar{x}_m\in \mathbb{R}^n</span> es el conjunto de <strong>todas</strong> las combinaciones lineales de <span class="math inline">\bar{x}_1, ..., \bar{x}_m</span></p>
+<p>En símbolos:</p>
+<p><span class="math display">span(\bar{x}_1, ..., \bar{x}_m)=\{\alpha_1\bar{x}_1+ \cdot\cdot\cdot +\alpha_m\bar{x}_m \ |\  \alpha_1, ...,\alpha_{m} \in \mathbb{R}\}</span></p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Observación:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">span(\bar{x}_1, ..., \bar{x}_m)</span> siempre es un subespacio vectorial de <span class="math inline">\mathbb{R}^n</span></p>
+</div>
+</div>
+<p><img src="images/ej_span.png" class="img-fluid" style="width:80.0%"></p>
+</section>
+<section id="independencia-lineal" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="independencia-lineal"><span class="header-section-number">1.11</span> Independencia lineal</h2>
+<p><img src="images/ind_lineal.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+<section id="bases" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="bases"><span class="header-section-number">1.12</span> Bases</h2>
+<p><img src="images/bases.png" class="img-fluid" style="width:60.0%"></p>
+<p>Ejemplos de Base:</p>
+<p><img src="images/ej_bases.png" class="img-fluid" style="width:60.0%"></p>
+<section id="bases-y-dimensión" class="level3" data-number="1.12.1">
+<h3 data-number="1.12.1" class="anchored" data-anchor-id="bases-y-dimensión"><span class="header-section-number">1.12.1</span> Bases y Dimensión</h3>
+<p>Dos propiedades claves acerca de bases:</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Terorema:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Todo subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> tiene una base</li>
+<li>Todas las bases de un subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> tienen el <em>mismo tamaño</em></li>
+</ul>
+</div>
+</div>
+<p>La última proposición nos permite definir la <em>dimensión</em> de un subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> como el tamaño de sus bases.</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Observación
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>La dimensión de <span class="math inline">S = \{\bar{0}\}</span> es <span class="math inline">0</span> y la dimensión de <span class="math inline">S = \mathbb{R}^n</span> es <span class="math inline">n</span></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="bases-como-sistemas-de-coordenadas" class="level3" data-number="1.12.2">
+<h3 data-number="1.12.2" class="anchored" data-anchor-id="bases-como-sistemas-de-coordenadas"><span class="header-section-number">1.12.2</span> Bases como sistemas de coordenadas</h3>
+<p>Debido a la siguiente proposición, una base siempre provee un sistema de coordenadas para el espacio.</p>
+<div class="callout-note callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Proposición:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si <span class="math inline">B</span> es una base para un subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> , entonces todo vector <span class="math inline">\bar{x}\in S</span> se puede escribir de manera única como una combinación lineal de los vectores de <span class="math inline">B</span></p>
+</div>
+</div>
+<p><img src="images/sist_coordenadas.png" class="img-fluid" style="width:80.0%"></p>
+</section>
+<section id="bases-ortonormales" class="level3" data-number="1.12.3">
+<h3 data-number="1.12.3" class="anchored" data-anchor-id="bases-ortonormales"><span class="header-section-number">1.12.3</span> Bases ortonormales</h3>
+<p>Una base ortonormal <span class="math inline">B</span> de un subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> es una base de <span class="math inline">S</span> que satisface:</p>
+<ul>
+<li>Los vectores en <span class="math inline">B</span> son ortogonales entre sí (par a par)</li>
+<li>La norma de cada vector en <span class="math inline">B</span> es 1</li>
+</ul>
+<p>El “cambio de coordenada” a una base ortonormal es mucho más simple:</p>
+<p><img src="images/base_ortonormales.png" class="img-fluid" style="width:80.0%"></p>
+<p>Una propiedad clave es la siguiente:</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Terorema:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todo subespacio vectorial <span class="math inline">S</span> de <span class="math inline">\mathbb{R}^n</span> tiene una base ortonormal</p>
+</div>
+</div>
+<p>De hecho, existe un procedimiento para transformar una base arbitraria a otra base ortonormal de manera que el span es el mismo (proceso de Gram-Schmidt)</p>
+</section>
+<section id="bases-canónicas" class="level3" data-number="1.12.4">
+<h3 data-number="1.12.4" class="anchored" data-anchor-id="bases-canónicas"><span class="header-section-number">1.12.4</span> Bases Canónicas</h3>
+<p><img src="images/bases_canonicas.png" class="img-fluid" style="width:80.0%"></p>
+<p><img src="images/bases_canonicas2.png" class="img-fluid" style="width:80.0%"></p>
+<p>De hecho, son ortogonales y tienen norma 1 * La base canónica es una base ortonormal</p>
+</section>
+</section>
+<section id="referencias-del-cápitulo" class="level2" data-number="1.13">
+<h2 data-number="1.13" class="anchored" data-anchor-id="referencias-del-cápitulo"><span class="header-section-number">1.13</span> Referencias del Cápitulo</h2>
+<iframe src="https://www.youtube.com/embed/wiuEEkP_XuM?start=0" width="600" height="300" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./matrices.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

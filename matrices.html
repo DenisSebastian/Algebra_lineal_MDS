@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Algrebra Lineal y Optimización - 2&nbsp; Matrices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./vectores.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Algrebra Lineal y Optimización</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vectores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#conceptos-generales" id="toc-conceptos-generales" class="nav-link active" data-scroll-target="#conceptos-generales"> <span class="header-section-number">2.1</span> Conceptos Generales</a></li>
+  <li><a href="#suma-de-matrices" id="toc-suma-de-matrices" class="nav-link" data-scroll-target="#suma-de-matrices"> <span class="header-section-number">2.2</span> Suma de matrices</a></li>
+  <li><a href="#ponderación-de-matrices" id="toc-ponderación-de-matrices" class="nav-link" data-scroll-target="#ponderación-de-matrices"> <span class="header-section-number">2.3</span> Ponderación de Matrices</a></li>
+  <li><a href="#multiplicación-matriz-vector" id="toc-multiplicación-matriz-vector" class="nav-link" data-scroll-target="#multiplicación-matriz-vector"> <span class="header-section-number">2.4</span> Multiplicación matriz-vector</a></li>
+  <li><a href="#multiplicación-matriz-matriz" id="toc-multiplicación-matriz-matriz" class="nav-link" data-scroll-target="#multiplicación-matriz-matriz"> <span class="header-section-number">2.5</span> Multiplicación matriz-matriz</a></li>
+  <li><a href="#producto-externo" id="toc-producto-externo" class="nav-link" data-scroll-target="#producto-externo"> <span class="header-section-number">2.6</span> Producto Externo</a></li>
+  <li><a href="#matrices-como-transformaciones-lineales" id="toc-matrices-como-transformaciones-lineales" class="nav-link" data-scroll-target="#matrices-como-transformaciones-lineales"> <span class="header-section-number">2.7</span> Matrices como transformaciones lineales</a></li>
+  <li><a href="#rango-y-nulidad" id="toc-rango-y-nulidad" class="nav-link" data-scroll-target="#rango-y-nulidad"> <span class="header-section-number">2.8</span> Rango y nulidad</a></li>
+  <li><a href="#transpuesta" id="toc-transpuesta" class="nav-link" data-scroll-target="#transpuesta"> <span class="header-section-number">2.9</span> Transpuesta</a>
+  <ul class="collapse">
+  <li><a href="#espacio-fila" id="toc-espacio-fila" class="nav-link" data-scroll-target="#espacio-fila"> <span class="header-section-number">2.9.1</span> Espacio fila</a></li>
+  <li><a href="#mas-propiedades-del-rango" id="toc-mas-propiedades-del-rango" class="nav-link" data-scroll-target="#mas-propiedades-del-rango"> <span class="header-section-number">2.9.2</span> Mas propiedades del Rango</a></li>
+  </ul></li>
+  <li><a href="#espacio-nulo-izquierdo" id="toc-espacio-nulo-izquierdo" class="nav-link" data-scroll-target="#espacio-nulo-izquierdo"> <span class="header-section-number">2.10</span> Espacio nulo izquierdo</a></li>
+  <li><a href="#los-4-espacios-fundamentales" id="toc-los-4-espacios-fundamentales" class="nav-link" data-scroll-target="#los-4-espacios-fundamentales"> <span class="header-section-number">2.11</span> Los 4 espacios fundamentales</a>
+  <ul class="collapse">
+  <li><a href="#espacios-ortogonales" id="toc-espacios-ortogonales" class="nav-link" data-scroll-target="#espacios-ortogonales"> <span class="header-section-number">2.11.1</span> Espacios Ortogonales</a></li>
+  <li><a href="#inversa-de-una-matriz" id="toc-inversa-de-una-matriz" class="nav-link" data-scroll-target="#inversa-de-una-matriz"> <span class="header-section-number">2.11.2</span> Inversa de una matriz</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></h1>
+<p class="subtitle lead">Conceptos Básicos de Matrices</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="conceptos-generales" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="conceptos-generales"><span class="header-section-number">2.1</span> Conceptos Generales</h2>
+<ul>
+<li>Una matriz es un arreglo bidimensional de números reales</li>
+</ul>
+<p>Decimos que la matriz es de <span class="math inline">n \times m</span> si el número de filas es <span class="math inline">n</span> y el número de columnas es <span class="math inline">m</span></p>
+<p><img src="images/matrices1.png" class="img-fluid" style="width:40.0%"> Si <span class="math inline">n = m</span> decimos que la matriz es cuadrada</p>
+<p>Notación:</p>
+<p>Si <span class="math inline">A</span> es una matriz, entonces:</p>
+<ul>
+<li><span class="math inline">A_{i,j}</span>denota la entrada en la fila <span class="math inline">i</span>-ésima y columna <span class="math inline">j</span>-ésima de <span class="math inline">A</span></li>
+<li><span class="math inline">A_{i,*}</span>denota la fila <span class="math inline">i</span>-ésima de <span class="math inline">A</span> (como vector)</li>
+<li><span class="math inline">A_{*,j}</span>denota la columna <span class="math inline">j</span>-ésima de <span class="math inline">A</span> (como vector)</li>
+</ul>
+<p><img src="images/matrices2.png" class="img-fluid" style="width:80.0%"></p>
+<p>Recuerde: Escribimos un vector como fila o columna según nos convenga</p>
+</section>
+<section id="suma-de-matrices" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="suma-de-matrices"><span class="header-section-number">2.2</span> Suma de matrices</h2>
+<p><img src="images/suma_matrices.png" class="img-fluid" style="width:60.0%"></p>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Propiedades:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Asociatividad: $A + (B + C) = (A + B) + C $</li>
+<li>Conmutatividad: <span class="math inline">A + B = B + A</span></li>
+<li>Elemento neutro e inversos</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="ponderación-de-matrices" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="ponderación-de-matrices"><span class="header-section-number">2.3</span> Ponderación de Matrices</h2>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Propiedades:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Distributividad:</li>
+</ul>
+<p><span class="math display">\gamma(A + B) = \gamma A + \gamma B\\ (\gamma + \delta)A = \gamma A + \delta A</span></p>
+<ul>
+<li>Compatibilidad:</li>
+</ul>
+<p><span class="math display">(\gamma\delta)A = \gamma(\delta A)</span></p>
+</div>
+</div>
+</section>
+<section id="multiplicación-matriz-vector" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="multiplicación-matriz-vector"><span class="header-section-number">2.4</span> Multiplicación matriz-vector</h2>
+<p><img src="images/mul_matriz_vector.png" class="img-fluid" style="width:90.0%"> <img src="images/mul_matriz_vector2.png" class="img-fluid" style="width:90.0%"></p>
+<p>Es útil visualizar el producto matriz-vector (por la derecha) como una combinación lineal:</p>
+<p><img src="images/mul_matriz_vector3.png" class="img-fluid" style="width:60.0%"></p>
+<p>Es decir: <span class="math inline">A\bar{x}</span> es la combinación lineal de las columnas de <span class="math inline">A</span> según los ponderadores en <span class="math inline">\bar{x}</span></p>
+<p><img src="images/mul_matriz_vector4.png" class="img-fluid" style="width:60.0%"></p>
+<p>Lo mismo para el producto matrix-vector por la izquierda:</p>
+<p><img src="images/mul_matriz_vector5.png" class="img-fluid" style="width:90.0%"></p>
+<p>Es decir: <span class="math inline">\bar{x}A</span> es la combinación lineal de las filas de A según los ponderadores en <span class="math inline">\bar{x}</span></p>
+<p><img src="images/mul_matriz_vector6.png" class="img-fluid" style="width:60.0%"></p>
+</section>
+<section id="multiplicación-matriz-matriz" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="multiplicación-matriz-matriz"><span class="header-section-number">2.5</span> Multiplicación matriz-matriz</h2>
+<p><img src="images/mul_matriz_matriz.png" class="img-fluid" style="width:70.0%"></p>
+<p>Es decir:</p>
+<p><span class="math inline">(AB)_{i,j}</span> es el <strong>producto punto</strong> entre la fila <span class="math inline">i</span>-ésima de <span class="math inline">A</span> y la columna <span class="math inline">j</span>-ésima de <span class="math inline">B</span></p>
+<p>También podemos ver el producto matriz-matriz como varios productos matriz-vector:</p>
+<p><img src="images/mul_matriz_matriz2.png" class="img-fluid" style="width:70.0%"></p>
+</section>
+<section id="producto-externo" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="producto-externo"><span class="header-section-number">2.6</span> Producto Externo</h2>
+<p><img src="images/prod_externo.png" class="img-fluid" style="width:90.0%"></p>
+<p>Es decir, <span class="math inline">\bar{x} \otimes \bar{y}</span> es la matriz de n × m que satisface <span class="math inline">(\bar{x}\otimes\bar{y}_{i,j} = x_iy_j</span></p>
+<p><img src="images/prod_externo2.png" class="img-fluid" style="width:90.0%"></p>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Propiedades:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/prod_externo3.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+</div>
+<p><em>Podemos ver el producto matriz-matriz en función de productos externos:</em></p>
+<p><img src="images/pext_mat_mat.png" class="img-fluid" style="width:60.0%"> <img src="images/pext_mat_mat2.png" class="img-fluid" style="width:60.0%"></p>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Propiedades Multiplicación Matriz-Matriz:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/prop_matriz_matriz.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+</div>
+</section>
+<section id="matrices-como-transformaciones-lineales" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="matrices-como-transformaciones-lineales"><span class="header-section-number">2.7</span> Matrices como transformaciones lineales</h2>
+<p><img src="images/trans_lineal.png" class="img-fluid" style="width:90.0%"></p>
+<p>Dos espacios fundamentales</p>
+<p><img src="images/espacios_fundamentales1.png" class="img-fluid" style="width:90.0%"> <img src="images/espacios_fundamentales2.png" class="img-fluid" style="width:90.0%"> <img src="images/espacios_fundamentales3.png" class="img-fluid" style="width:90.0%"> <img src="images/espacios_fundamentales4.png" class="img-fluid" style="width:90.0%"></p>
+<p>Dos Espacios fundamentales Ejemplos</p>
+<p><img src="images/ej_espacios_fundamentales.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_espacios_fundamentales1.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_espacios_fundamentales2.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_espacios_fundamentales3.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+<section id="rango-y-nulidad" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="rango-y-nulidad"><span class="header-section-number">2.8</span> Rango y nulidad</h2>
+<p>Para una matriz A de n × m definimos su rango y su nulidad como:</p>
+<p><span class="math display">rank(A) = dimensión de Col(A)</span></p>
+<p><span class="math display">nullity(A) = dimensión de Null(A)</span></p>
+<p>Rango y nulidad</p>
+<p><img src="images/ej_rango_nulidad1.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_rango_nulidad2.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_rango_nulidad3.png" class="img-fluid" style="width:90.0%"> <img src="images/ej_rango_nulidad4.png" class="img-fluid" style="width:90.0%"></p>
+<div class="callout-warning callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Teorema Rango Nulidad
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sea A una matriz de <span class="math inline">n \times m</span>. Tenemos que:</p>
+<p><span class="math display">rank(A) + nullity(A) = m</span></p>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+propiedades del rango
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/prop_rango.png" class="img-fluid" style="width:60.0%"></p>
+</div>
+</div>
+</section>
+<section id="transpuesta" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="transpuesta"><span class="header-section-number">2.9</span> Transpuesta</h2>
+<p><img src="images/transpuesta1.png" class="img-fluid" style="width:70.0%"> <img src="images/transpuesta2.png" class="img-fluid" style="width:60.0%"> <img src="images/transpuesta3.png" class="img-fluid" style="width:60.0%"></p>
+<section id="espacio-fila" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="espacio-fila"><span class="header-section-number">2.9.1</span> Espacio fila</h3>
+<p><img src="images/espacio_fila1.png" class="img-fluid" style="width:70.0%"> <img src="images/espacio_fila1.png" class="img-fluid" style="width:70.0%"></p>
+</section>
+<section id="mas-propiedades-del-rango" class="level3" data-number="2.9.2">
+<h3 data-number="2.9.2" class="anchored" data-anchor-id="mas-propiedades-del-rango"><span class="header-section-number">2.9.2</span> Mas propiedades del Rango</h3>
+<p><img src="images/prop_rango2.png" class="img-fluid" style="width:70.0%"> <img src="images/prop_rango3.png" class="img-fluid" style="width:40.0%"> <img src="images/prop_rango4.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+</section>
+<section id="espacio-nulo-izquierdo" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="espacio-nulo-izquierdo"><span class="header-section-number">2.10</span> Espacio nulo izquierdo</h2>
+<p><img src="images/nulo_izquierdo.png" class="img-fluid" style="width:70.0%"></p>
+</section>
+<section id="los-4-espacios-fundamentales" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="los-4-espacios-fundamentales"><span class="header-section-number">2.11</span> Los 4 espacios fundamentales</h2>
+<p><img src="images/4_esp_fundamentales.png" class="img-fluid" style="width:90.0%"></p>
+<section id="espacios-ortogonales" class="level3" data-number="2.11.1">
+<h3 data-number="2.11.1" class="anchored" data-anchor-id="espacios-ortogonales"><span class="header-section-number">2.11.1</span> Espacios Ortogonales</h3>
+<p><img src="images/ortogonales.png" class="img-fluid" style="width:60.0%"></p>
+<p>Complementos Ortogonales</p>
+<p><img src="images/ortogonales2.png" class="img-fluid" style="width:60.0%"></p>
+</section>
+<section id="inversa-de-una-matriz" class="level3" data-number="2.11.2">
+<h3 data-number="2.11.2" class="anchored" data-anchor-id="inversa-de-una-matriz"><span class="header-section-number">2.11.2</span> Inversa de una matriz</h3>
+<p><img src="images/inversa_m1.png" class="img-fluid" style="width:70.0%"></p>
+<p>¿Cuándo existe la inversa de una matriz?</p>
+<p><img src="images/inversa_m2.png" class="img-fluid" style="width:90.0%"> <img src="images/inversa_m3.png" class="img-fluid" style="width:60.0%"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./vectores.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>
