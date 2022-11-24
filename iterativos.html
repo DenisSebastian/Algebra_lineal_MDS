@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Algrebra Lineal y Optimización - 4&nbsp; Métodos Iterativos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./gradient_desc.html" rel="next">
+<link href="./calculo.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Algrebra Lineal y Optimización</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vectores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./iterativos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gradient_desc.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#minimizando-una-función" id="toc-minimizando-una-función" class="nav-link active" data-scroll-target="#minimizando-una-función"> <span class="header-section-number">4.1</span> Minimizando una Función</a></li>
+  <li><a href="#métodos-iterativos" id="toc-métodos-iterativos" class="nav-link" data-scroll-target="#métodos-iterativos"> <span class="header-section-number">4.2</span> Métodos Iterativos</a></li>
+  <li><a href="#descenso-por-el-gradiente" id="toc-descenso-por-el-gradiente" class="nav-link" data-scroll-target="#descenso-por-el-gradiente"> <span class="header-section-number">4.3</span> Descenso por el gradiente</a></li>
+  <li><a href="#método-de-newton" id="toc-método-de-newton" class="nav-link" data-scroll-target="#método-de-newton"> <span class="header-section-number">4.4</span> Método de Newton</a>
+  <ul class="collapse">
+  <li><a href="#encontrar-raíces-de-funciones-una-variable" id="toc-encontrar-raíces-de-funciones-una-variable" class="nav-link" data-scroll-target="#encontrar-raíces-de-funciones-una-variable"> <span class="header-section-number">4.4.1</span> Encontrar Raíces de funciones: una variable</a></li>
+  <li><a href="#minimizar-una-función-una-variable" id="toc-minimizar-una-función-una-variable" class="nav-link" data-scroll-target="#minimizar-una-función-una-variable"> <span class="header-section-number">4.4.2</span> Minimizar una función: una variable</a></li>
+  <li><a href="#minimizar-una-función-varias-variable" id="toc-minimizar-una-función-varias-variable" class="nav-link" data-scroll-target="#minimizar-una-función-varias-variable"> <span class="header-section-number">4.4.3</span> Minimizar una función: varias variable</a></li>
+  </ul></li>
+  <li><a href="#método-de-newton-vs-descenso-por-el-gradiente" id="toc-método-de-newton-vs-descenso-por-el-gradiente" class="nav-link" data-scroll-target="#método-de-newton-vs-descenso-por-el-gradiente"> <span class="header-section-number">4.5</span> Método de Newton vs Descenso por el gradiente</a></li>
+  <li><a href="#aplicaciones-en-machine-learning" id="toc-aplicaciones-en-machine-learning" class="nav-link" data-scroll-target="#aplicaciones-en-machine-learning"> <span class="header-section-number">4.6</span> Aplicaciones en Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#regresión-lineal" id="toc-regresión-lineal" class="nav-link" data-scroll-target="#regresión-lineal"> <span class="header-section-number">4.6.1</span> Regresión Lineal</a></li>
+  <li><a href="#regresión-logística" id="toc-regresión-logística" class="nav-link" data-scroll-target="#regresión-logística"> <span class="header-section-number">4.6.2</span> Regresión Logística</a></li>
+  </ul></li>
+  <li><a href="#perceptrón" id="toc-perceptrón" class="nav-link" data-scroll-target="#perceptrón"> <span class="header-section-number">4.7</span> Perceptrón</a>
+  <ul class="collapse">
+  <li><a href="#funciones-de-activación" id="toc-funciones-de-activación" class="nav-link" data-scroll-target="#funciones-de-activación"> <span class="header-section-number">4.7.1</span> Funciones de Activación</a></li>
+  </ul></li>
+  <li><a href="#red-neuronal" id="toc-red-neuronal" class="nav-link" data-scroll-target="#red-neuronal"> <span class="header-section-number">4.8</span> Red Neuronal</a>
+  <ul class="collapse">
+  <li><a href="#red-neuronal-caso-simple" id="toc-red-neuronal-caso-simple" class="nav-link" data-scroll-target="#red-neuronal-caso-simple"> <span class="header-section-number">4.8.1</span> Red Neuronal caso simple</a></li>
+  <li><a href="#red-neuronal-feed-forward" id="toc-red-neuronal-feed-forward" class="nav-link" data-scroll-target="#red-neuronal-feed-forward"> <span class="header-section-number">4.8.2</span> Red Neuronal Feed-Forward</a></li>
+  <li><a href="#red-neuronal-caso-clasificación" id="toc-red-neuronal-caso-clasificación" class="nav-link" data-scroll-target="#red-neuronal-caso-clasificación"> <span class="header-section-number">4.8.3</span> Red neuronal: caso clasificación</a></li>
+  </ul></li>
+  <li><a href="#gradiente-y-entrenamiento-de-una-red" id="toc-gradiente-y-entrenamiento-de-una-red" class="nav-link" data-scroll-target="#gradiente-y-entrenamiento-de-una-red"> <span class="header-section-number">4.9</span> Gradiente y Entrenamiento de una red</a></li>
+  <li><a href="#regla-de-la-cadena" id="toc-regla-de-la-cadena" class="nav-link" data-scroll-target="#regla-de-la-cadena"> <span class="header-section-number">4.10</span> Regla de la cadena</a>
+  <ul class="collapse">
+  <li><a href="#backpropagation" id="toc-backpropagation" class="nav-link" data-scroll-target="#backpropagation"> <span class="header-section-number">4.10.1</span> Backpropagation</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></h1>
+<p class="subtitle lead">Newton y Descenso por el Gradiente</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="minimizando-una-función" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="minimizando-una-función"><span class="header-section-number">4.1</span> Minimizando una Función</h2>
+<ul>
+<li><p>Hasta el momento, para minimizar hemos aprovechado convexidad, y encontrado una forma explícita o cerrada de la solución</p></li>
+<li><p>Cuadrados mínimos y regresión lineal, es uno de los pocos casos en donde uno puede hacer esto. En general no es posible…</p></li>
+<li><p>En el caso que no podemos encontrar una solución explicita o ni siquiera tenemos convexidad, una técnica clásica es utilizar <strong>métodos iterativos</strong></p></li>
+<li><p>Los métodos iterativos pueden ser útiles también cuando tenemos una solución explícita (cuadrados mínimos/regresión lineal), ya que calcular esta solución puede ser muy caro (por ejemplo invertir una matriz muy grande). Los métodos iterativos ofrecen una solución aproximada de manera más rápida</p></li>
+</ul>
+</section>
+<section id="métodos-iterativos" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="métodos-iterativos"><span class="header-section-number">4.2</span> Métodos Iterativos</h2>
+<p>Supongamos que queremos minimizar la función <span class="math inline">f : \mathbb{R}^n → \mathbb{R}</span></p>
+<p><strong>Idea de métodos iterativos:</strong></p>
+<ul>
+<li>Comenzamos en un vector <span class="math inline">x_0 \in R^n</span></li>
+<li>En cada iteración actualizamos el vector, según cierta regla (la idea es que el nuevo vector tenga un menor valor de <span class="math inline">f</span>)</li>
+<li>Nos detenemos según un criterio de parada
+<ul>
+<li>Número máximo de iteraciones</li>
+<li>La mejora en <span class="math inline">f</span> es menor que cierta tolerancia</li>
+</ul></li>
+</ul>
+<p>Veremos primero dos métodos:</p>
+<ul>
+<li>Descenso por el gradiente (primer orden)</li>
+<li>Método de Newton (segundo orden)</li>
+</ul>
+</section>
+<section id="descenso-por-el-gradiente" class="level2 page-columns page-full" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="descenso-por-el-gradiente"><span class="header-section-number">4.3</span> Descenso por el gradiente</h2>
+<p>Supongamos que queremos minimizar la función <span class="math inline">f : \mathbb{R}^n → \mathbb{R}</span></p>
+<p>Recordar que la dirección contraria al gradiente, es decir, <span class="math inline">−\nabla f</span>, es la dirección de <strong>máximo descenso</strong> (<span class="math inline">\|\nabla f\|</span> es la magnitud del máximo descenso)</p>
+<p>Descenso por el gradiente:</p>
+<ul>
+<li>Comenzamos en un vector <span class="math inline">\bar{x}_0 \in R^n</span></li>
+<li>En cada iteración, actualizamos el vector según la regla:</li>
+</ul>
+<p><span class="math display">\bar{x}_{k+1}\leftarrow \bar{x}_k- \eta \nabla f(\bar{x}_k)</span></p>
+<p>Donde <span class="math inline">\eta</span> es la tasa de aprendizaje</p>
+<ul>
+<li>Nos detenemos según el criterio de parada.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-12B310B1.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplo del Descenso del gradiente</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="método-de-newton" class="level2 page-columns page-full" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="método-de-newton"><span class="header-section-number">4.4</span> Método de Newton</h2>
+<section id="encontrar-raíces-de-funciones-una-variable" class="level3 page-columns page-full" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="encontrar-raíces-de-funciones-una-variable"><span class="header-section-number">4.4.1</span> Encontrar Raíces de funciones: una variable</h3>
+<p>El método de Newton es un método iterativo para encontrar raíces de funciones (puntos donde la función es 0)</p>
+<p>Idea para encontrar raíces de <span class="math inline">f : \mathbb{R} → \mathbb{R}</span> (caso una variable):</p>
+<ul>
+<li>En cada iteración tendremos un punto <span class="math inline">x_k \in \mathbb{R}</span> donde <span class="math inline">f(x_k) \neq 0</span></li>
+<li>Nos gustaría movernos a un punto <span class="math inline">x_k + h</span> tal que <span class="math inline">f(x_k + h) = 0</span></li>
+<li>Podemos usar una aproximación lineal para <span class="math inline">f(x_k + h) = 0</span></li>
+<li>La mejor aproximación lineal entorno a <span class="math inline">x_k</span> está dada por la derivada:</li>
+</ul>
+<p><span class="math display">f(x_k + h) \approx f'(x_k)h + f(x_k)</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-84E4ECF8.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Derivada de <span class="math inline">f(x_k)</span></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Resolvemos en vez la ecuación:</li>
+</ul>
+<p><span class="math display">f'(x_k)h + f(x_k) = 0 \qquad\Rightarrow \qquad h=\frac{f(x_k)}{f'(x_k)}</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-CD02015E.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación gráfica de <span class="math inline">h</span></figcaption><p></p>
+</figure>
+</div>
+<p>Luego nos movemos al punto <span class="math inline">x_k- \frac{f(x_k)}{f'(x_k)}</span></p>
+<ul>
+<li>Comenzamos con un <span class="math inline">x_0 \in \mathbb{R}</span></li>
+<li>En cada iteración, actualizamos el punto según la regla:</li>
+</ul>
+<p><span class="math display">x_{k+1}\leftarrow x_k- \frac{f(x_k)}{f'(x_k)}</span> - Nos detenemos según un criterio de parada</p>
+</section>
+<section id="minimizar-una-función-una-variable" class="level3 page-columns page-full" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="minimizar-una-función-una-variable"><span class="header-section-number">4.4.2</span> Minimizar una función: una variable</h3>
+<p>Supongamos ahora que queremos minimizar una función <span class="math inline">f : \mathbb{R} → \mathbb{R}</span> en una variable.</p>
+<p>Podemos usar Newton para encontrar una raíz de la derivada <span class="math inline">f′</span></p>
+<p>Para minimizar <span class="math inline">f : \mathbb{R} → \mathbb{R}</span> (caso una variable):</p>
+<ul>
+<li>Comenzamos con un <span class="math inline">x_0 \in \mathbb{R}</span></li>
+<li>En cada iteración, actualizamos el punto según la regla:</li>
+</ul>
+<p><span class="math display">x_{k+1}\leftarrow x_k- \frac{f'(x_k)}{f''(x_k)}</span></p>
+<ul>
+<li>Nos detenemos según un criterio de parada</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-8EE52C8D.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Tasa de Aprendizaje dependiendo de la zona</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="minimizar-una-función-varias-variable" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="minimizar-una-función-varias-variable"><span class="header-section-number">4.4.3</span> Minimizar una función: varias variable</h3>
+<p>Para minimizar una función <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R}</span> (caso varias variables):</p>
+<ul>
+<li>Comenzamos con un vector x ̄0 ∈ R</li>
+<li>En cada iteración, actualizamos el vector según la regla:</li>
+</ul>
+<p><span class="math display">x_{k+1} \leftarrow x_k−H_f(x_k)^{−1} \nabla f(x_k) </span></p>
+<ul>
+<li>Nos detenemos según un criterio de parada</li>
+</ul>
+<p><em>Observaciones</em>: Necesitamos que la inversa del Hessiano exista</p>
+</section>
+</section>
+<section id="método-de-newton-vs-descenso-por-el-gradiente" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="método-de-newton-vs-descenso-por-el-gradiente"><span class="header-section-number">4.5</span> Método de Newton vs Descenso por el gradiente</h2>
+<p><strong>Método de Newton:</strong></p>
+<ul>
+<li>En principio, no necesitamos ningún parámetro extra (por ej: tasa de aprendizaje)</li>
+<li>En general mejor convergencia ya que utiliza la segunda derivada</li>
+<li>Necesita más supuestos: el Hessiano debe existir y ser invertible</li>
+<li>Puede ser más costoso computacionalmente ya que hay que calcular <span class="math inline">H_f^{−1}</span></li>
+</ul>
+<p><strong>Descenso por el gradiente:</strong></p>
+<ul>
+<li>Necesitamos escoger la tasa de aprendizaje</li>
+<li>Más simple: sólo usamos la primera derivada</li>
+<li>Puede ser más eficiente computacionalmente para datos grandes (muchas variables)</li>
+</ul>
+</section>
+<section id="aplicaciones-en-machine-learning" class="level2 page-columns page-full" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="aplicaciones-en-machine-learning"><span class="header-section-number">4.6</span> Aplicaciones en Machine Learning</h2>
+<p>Algunos problemas que se pueden resuelven con métodos iterativos, y en particular, con Descenso del Gradiente:</p>
+<ul>
+<li>Regresión Lineal</li>
+<li>Regresión Logística (simple o multinomial)</li>
+<li>Perceptrón</li>
+<li>Redes Neuronales Feed-Forward (o Perceptron Multicapa)</li>
+<li>…</li>
+</ul>
+<section id="regresión-lineal" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="regresión-lineal"><span class="header-section-number">4.6.1</span> Regresión Lineal</h3>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span> donde cada <span class="math inline">x_i</span> pertenece a <span class="math inline">\mathbb{R}^m</span> e <span class="math inline">y_i \in \mathbb{R}</span>. <span class="math inline">y_i</span> indica la respuesta correcta de <span class="math inline">\bar{x}_i</span></p>
+<p>Para un dato nuevo <span class="math inline">\bar{x} \in \mathbb{R}^m</span> queremos predecir su valor de <span class="math inline">y</span></p>
+<p><strong>Regresión Lineal:</strong></p>
+<p>Aprendemos la función de la forma:</p>
+<p><span class="math display">\hat{y} = c_0 + c_1x_1 + \cdots + c_m x_m</span> Buscamos parámetros <span class="math inline">\bar{c}</span> que minimicen:</p>
+<p><span class="math display">Loss(\bar{c})=\frac{1}{n}\sum_{i=1}^{n} (y_i-\hat{y}_i)^2</span></p>
+<p><em>Ejercicio:</em> ¿Cómo se ve la regla de actualización de Descenso por el Gradiente?</p>
+<p>Caso univariado</p>
+<p><span class="math display">Loss(\bar{c})= \frac{1}{2}(y-\hat{y})^2=(y-c_0-c_1x_1+\cdots+c_mx_m)^2</span></p>
+<p><span class="math display">c_k\leftarrow c_k+n2(y-\hat{y})\cdot x_k</span></p>
+<p>Caso multivariado</p>
+<p><span class="math display">c_k\leftarrow c_k+y\frac{2}{n}\sum_{i=1}^{n} (y_i-\hat{y}_i)\cdot x_{ik}</span></p>
+</section>
+<section id="regresión-logística" class="level3 page-columns page-full" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="regresión-logística"><span class="header-section-number">4.6.2</span> Regresión Logística</h3>
+<p>Utilizado para clasificación binaria (versión simple) o múltiple (versión multinomial)</p>
+<p><strong>Clasificación binaria:</strong></p>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span> donde cada <span class="math inline">x_i</span> pertenece a <span class="math inline">\mathbb{R}^m</span> e <span class="math inline">y_i \in {0,1}</span>. <span class="math inline">y_i</span> indica la respuesta correcta de <span class="math inline">\bar{x}_i</span></p>
+<p>Para un dato nuevo <span class="math inline">\bar{x} \in \mathbb{R}^m</span> queremos predecir su clase, en este caso, la probabilidad de que <span class="math inline">y= 1</span></p>
+<p><strong>Regresión Logísticas Simple</strong></p>
+<p>Aprendemos una función de la forma:</p>
+<p><span class="math display">\hat{y} = sigmoid(u)\frac{1}{1+e^{-u}}</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-5990C7C8.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función Sigmoide</figcaption><p></p>
+</figure>
+</div>
+<p><span class="math display">u = c_0 + c_1x_1 + \cdots + c_m x_m</span></p>
+<p><strong>Regresión Logística simple: función de error</strong></p>
+<p>¿Qué función de error minimizamos en este caso?</p>
+<ul>
+<li>¿Error cuadrático?</li>
+</ul>
+<p><span class="math display">Minimizamos\; \frac{1}{n} \sum_{i=1}^n (y_i-\hat{y}_i)^2</span></p>
+<p><em>Esta función no es convexa</em> <strong>Esta función si es convexa</strong></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-A3DBF843.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función Convexa</figcaption><p></p>
+</figure>
+</div>
+<dl>
+<dt>Ejercicio:</dt>
+<dd>
+<p>Demuestre que la regla de actualización para Descenso por el Gradiente se ve igual que la de Regresión Lineal</p>
+</dd>
+</dl>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-73EFD182.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Descenso por el Gradiente se ve igual que la de Regresión Lineal</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Regresión Logística multinomial</strong></p>
+<p>Clasificación múltiple (más de dos clases):</p>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span> donde cada <span class="math inline">x_i</span> pertenece a <span class="math inline">\mathbb{R}^m</span> e <span class="math inline">y_i \in \mathbb{R}^c</span>. <span class="math inline">y_i</span> indica la clase correcta de <span class="math inline">\bar{x}_i</span> (es decir, <span class="math inline">\bar{y}_i</span> le asigna probabilidad de 1 al clase correcta)</p>
+<p>Para un dato nuevo <span class="math inline">\bar{x} \in \mathbb{R}^m</span> queremos predecir una distribución de clases de probabilidad sobra las <span class="math inline">C</span> clases.</p>
+<p>Aprendemos una función de la forma (softmax):</p>
+<p><span class="math display">\hat{y} = softmax(u_1,\dots,u_C) = \left(\frac{e^{u_1}}{\sum_{k=1}^{C} e^{u_k}}, \dots, \frac{e^{u_C}}{\sum_{k=1}^{C} e^{u_k}}\right)</span></p>
+<p><span class="math inline">u_k = c_{k0} + c_{k1}x_1 + \dots + c_{km}x_m</span></p>
+<p>Utilizamos la entropía cruzada como error (para cada dato <span class="math inline">(\bar{x}_i, \bar{y}_i)</span>):</p>
+<p><span class="math display">-\sum_{k=1}^C =\bar{y}_{ik}\;log(\hat{y}_{ik})</span></p>
+</section>
+</section>
+<section id="perceptrón" class="level2 page-columns page-full" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="perceptrón"><span class="header-section-number">4.7</span> Perceptrón</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-9D78763E.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación gráfica de un perceptrón</figcaption><p></p>
+</figure>
+</div>
+<p><span class="math display">u = x_1w_1 + x_2w_2 + \dots + x_mw_m + b</span> <span class="math display">\hat{y} = f(u)</span></p>
+<ul>
+<li>Si <span class="math inline">f = sigmoid</span> tenemos el modelo de regresión logística simple</li>
+<li>Si <span class="math inline">f = id</span> tenemos el modelo de regresión lineal</li>
+</ul>
+<section id="funciones-de-activación" class="level3 page-columns page-full" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="funciones-de-activación"><span class="header-section-number">4.7.1</span> Funciones de Activación</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-22E2C28D.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Funciones de activación más comunes</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="red-neuronal" class="level2 page-columns page-full" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="red-neuronal"><span class="header-section-number">4.8</span> Red Neuronal</h2>
+<section id="red-neuronal-caso-simple" class="level3 page-columns page-full" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="red-neuronal-caso-simple"><span class="header-section-number">4.8.1</span> Red Neuronal caso simple</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-D9E29A8B.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Red Neuronal caso simple</figcaption><p></p>
+</figure>
+</div>
+<p>Notación matricial/vectorial:</p>
+<ul>
+<li><span class="math inline">\bar{h} = f(\bar{x}W + b)</span> (<em>f</em> se aplica coordenada a coordenada)</li>
+<li><span class="math inline">\hat{y} = g ( \bar{h} \bar{u}+c)</span></li>
+</ul>
+</section>
+<section id="red-neuronal-feed-forward" class="level3 page-columns page-full" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="red-neuronal-feed-forward"><span class="header-section-number">4.8.2</span> Red Neuronal Feed-Forward</h3>
+<p>Feedforward fully connected networks o Multilayer Perceptron (MLP):</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-17BA6267.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Red Neuronal Feed-Forward</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Parámetros de la red: <span class="math inline">W^{(1)},\bar{b}^{(1)},...,W^{(L)},\bar{b}^{(L)},U,\bar{c}</span></li>
+<li>Hiperparámetros: cantidad de capas L, tamaño entrada y salida, tamaño capas, funciones de activación, función de salida.</li>
+</ul>
+</section>
+<section id="red-neuronal-caso-clasificación" class="level3 page-columns page-full" data-number="4.8.3">
+<h3 data-number="4.8.3" class="anchored" data-anchor-id="red-neuronal-caso-clasificación"><span class="header-section-number">4.8.3</span> Red neuronal: caso clasificación</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-71CCCBD6.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Red neuronal: caso clasificación</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><span class="math inline">C</span> es la cantidad de clases en donde estamos clasificando</li>
+<li><span class="math inline">\hat{y}</span> es una distribución de probabilidad sobre las clases</li>
+<li>Comúnmente la función de salida <span class="math inline">g</span> es en <span class="math inline">C</span> variables y se define como (softmax):</li>
+</ul>
+<p><span class="math display">g(a_1, \dots, a_C)= softmax(a_1,\dots,a_C) = \left(\frac{e^{a_1}}{\sum_{k=1}^{C} e^{a_k}}, \dots, \frac{e^{a_C}}{\sum_{k=1}^{C} e^{a_k}}\right)</span></p>
+<p><strong>Caso dos clases</strong></p>
+<ul>
+<li>Si tenemos sólo 2 clases, podemos tener una sola salida (es decir, <span class="math inline">C = 1</span>) y utilizar</li>
+</ul>
+<p><span class="math display">g(a) = sigmoid(a)</span> - En cualquiera de los dos casos (2 clases o más) usamos como error la entropía cruzada</p>
+<p><strong>Caso una sola neurona de salida</strong></p>
+<ul>
+<li>Tenemos una sola neurona de salida con función de activación id (i.e.&nbsp;sin función)</li>
+<li>Usamos el error cuadrático</li>
+</ul>
+</section>
+</section>
+<section id="gradiente-y-entrenamiento-de-una-red" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="gradiente-y-entrenamiento-de-una-red"><span class="header-section-number">4.9</span> Gradiente y Entrenamiento de una red</h2>
+<p>Es común usar Descenso por el Gradiente (y sus variantes) para encontrar los parámetros <span class="math inline">\bar{\Theta} = (W^{(1)}, \bar{b}^{(1)}, \dots, W^{(L)},\bar{b}^{(L)}, U, \bar{c})</span> de la red</p>
+<p>Regla de actualización: <span class="math inline">\bar{\theta} \leftarrow \bar{\theta}-\eta \nabla loss(\bar{\theta})</span></p>
+<p>Podemos mirar esta regla coordenada a coordenada:</p>
+<ul>
+<li>Para cada parámetro <span class="math inline">\theta</span> actualizamos <span class="math inline">\theta \leftarrow \theta-\eta\frac{\partial loss}{\partial\theta}(\bar{\Theta})</span></li>
+</ul>
+<p>¿ Cómo calculamos <span class="math inline">\frac{\partial loss}{\partial\theta}(\bar{\Theta})</span> para el parámetro <span class="math inline">\theta</span>?</p>
+<p>Recordar que <span class="math display">loss(\bar{\Theta)}= \frac{1}{N}\sum_{k = 1}^{N} error(\hat{y}^{(k)}, \bar{y}^{(k)})</span></p>
+<p><span class="math inline">N</span> es el tamaño del conjunto de entrenamiento.</p>
+<p><span class="math display">\Rightarrow \; \frac{\partial loss}{\partial\theta}(\bar{\Theta})= \frac{1}{N}\sum_{k = 1}^{N} \frac{error(\hat{y}^{(k)}, \bar{y}^{(k)})}{\partial\theta}(\bar{\Theta})</span></p>
+<p>Nos podemos enfocar en calcular <span class="math inline">\frac{error(\hat{y}^{(k)}, \bar{y}^{(k)})}{\partial\theta}(\bar{\Theta})</span> para un dato genérico <span class="math inline">(\bar{x}, \bar{y})</span></p>
+<p>Tenemos un dato fijo <span class="math inline">(\bar{x}, \bar{y})</span> y un punto <span class="math inline">\bar{\Theta} \in \mathbb{R}^d</span>. Queremos calcular <span class="math inline">\frac{error(\hat{y}^{(k)}, \bar{y}^{(k)})}{\partial\theta}(\bar{\Theta})</span> para todos los parámetros <span class="math inline">\theta</span></p>
+<p>Podemos usar <strong>Backpropagation</strong></p>
+<dl>
+<dt>Idea backpropagation:</dt>
+<dd>
+<p>Regla de la cadena + programación dinámica</p>
+</dd>
+</dl>
+</section>
+<section id="regla-de-la-cadena" class="level2 page-columns page-full" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="regla-de-la-cadena"><span class="header-section-number">4.10</span> Regla de la cadena</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-156CF645.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Regla de la cadena con una y varias variables</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-F09A5703.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplo de la regla de la cadena</figcaption><p></p>
+</figure>
+</div>
+<section id="backpropagation" class="level3 page-columns page-full" data-number="4.10.1">
+<h3 data-number="4.10.1" class="anchored" data-anchor-id="backpropagation"><span class="header-section-number">4.10.1</span> Backpropagation</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-45A45D83.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplo de Backpropagation, condiciones iniciales</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-2872934B.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Backpropagation: fase forward</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-317F4191.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Backpropagation: fase backward</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-1A00596C.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Backpropagation, nuevo vector para el descenso por gradiente</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-5EA5FF67.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Backpropagation: ejemplo donde el fase backward se necesita la regla de la cadena</figcaption><p></p>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./calculo.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./gradient_desc.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

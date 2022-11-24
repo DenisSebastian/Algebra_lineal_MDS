@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Algrebra Lineal y Optimización - 5&nbsp; Descenso del Gradiente</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./iterativos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Algrebra Lineal y Optimización</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vectores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./iterativos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gradient_desc.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#descenso-del-gradiente-general" id="toc-descenso-del-gradiente-general" class="nav-link active" data-scroll-target="#descenso-del-gradiente-general"> <span class="header-section-number">5.1</span> Descenso del Gradiente: General</a>
+  <ul class="collapse">
+  <li><a href="#descenso-del-gradiente" id="toc-descenso-del-gradiente" class="nav-link" data-scroll-target="#descenso-del-gradiente"> <span class="header-section-number">5.1.1</span> Descenso del Gradiente</a></li>
+  <li><a href="#descenso-del-gradiente-estocástico" id="toc-descenso-del-gradiente-estocástico" class="nav-link" data-scroll-target="#descenso-del-gradiente-estocástico"> <span class="header-section-number">5.1.2</span> Descenso del gradiente estocástico</a></li>
+  <li><a href="#descenso-del-gradiente-mini-batch" id="toc-descenso-del-gradiente-mini-batch" class="nav-link" data-scroll-target="#descenso-del-gradiente-mini-batch"> <span class="header-section-number">5.1.3</span> Descenso del gradiente mini-batch</a></li>
+  <li><a href="#descenso-por-el-gradiente-con-momentum" id="toc-descenso-por-el-gradiente-con-momentum" class="nav-link" data-scroll-target="#descenso-por-el-gradiente-con-momentum"> <span class="header-section-number">5.1.4</span> Descenso por el gradiente con momentum</a></li>
+  <li><a href="#descenso-por-el-gradiente-con-momentum-nesterov" id="toc-descenso-por-el-gradiente-con-momentum-nesterov" class="nav-link" data-scroll-target="#descenso-por-el-gradiente-con-momentum-nesterov"> <span class="header-section-number">5.1.5</span> Descenso por el gradiente con momentum + Nesterov</a></li>
+  </ul></li>
+  <li><a href="#métodos-adaptativos-adagrad-rmsprop-adam" id="toc-métodos-adaptativos-adagrad-rmsprop-adam" class="nav-link" data-scroll-target="#métodos-adaptativos-adagrad-rmsprop-adam"> <span class="header-section-number">5.2</span> Métodos adaptativos: AdaGrad, RMSProp, Adam</a>
+  <ul class="collapse">
+  <li><a href="#adagrad" id="toc-adagrad" class="nav-link" data-scroll-target="#adagrad"> <span class="header-section-number">5.2.1</span> AdaGrad</a></li>
+  <li><a href="#rmsprop" id="toc-rmsprop" class="nav-link" data-scroll-target="#rmsprop"> <span class="header-section-number">5.2.2</span> RMSProp:</a></li>
+  <li><a href="#adam" id="toc-adam" class="nav-link" data-scroll-target="#adam"> <span class="header-section-number">5.2.3</span> Adam:</a></li>
+  </ul></li>
+  <li><a href="#regularización" id="toc-regularización" class="nav-link" data-scroll-target="#regularización"> <span class="header-section-number">5.3</span> Regularización</a>
+  <ul class="collapse">
+  <li><a href="#regularización-ell_2" id="toc-regularización-ell_2" class="nav-link" data-scroll-target="#regularización-ell_2"> <span class="header-section-number">5.3.1</span> Regularización <span class="math inline">\ell_2</span></a></li>
+  <li><a href="#regularización-ell_1" id="toc-regularización-ell_1" class="nav-link" data-scroll-target="#regularización-ell_1"> <span class="header-section-number">5.3.2</span> Regularización <span class="math inline">\ell_1</span></a></li>
+  <li><a href="#ridge-vs-lasso" id="toc-ridge-vs-lasso" class="nav-link" data-scroll-target="#ridge-vs-lasso"> <span class="header-section-number">5.3.3</span> Ridge vs Lasso</a></li>
+  <li><a href="#combinando-ell_1-y-ell_2" id="toc-combinando-ell_1-y-ell_2" class="nav-link" data-scroll-target="#combinando-ell_1-y-ell_2"> <span class="header-section-number">5.3.4</span> Combinando <span class="math inline">\ell_1</span> y <span class="math inline">\ell_2</span></a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"> <span class="header-section-number">5.4</span> Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></h1>
+<p class="subtitle lead">Variantes del DG.</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="descenso-del-gradiente-general" class="level2 page-columns page-full" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="descenso-del-gradiente-general"><span class="header-section-number">5.1</span> Descenso del Gradiente: General</h2>
+<p>Enunciado de Ejemplo: Muchas veces la función a minimizar corresponde a una suma o un promedio de funciones Por ejemplo aprendizaje supervisado:</p>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span> donde cada <span class="math inline">x_i</span> pertenece a <span class="math inline">\mathbb{R}^m</span> e <span class="math inline">y_i</span> es la respuesta correcta. <span class="math inline">e_i</span> es el error de nuestro modelo sobre el dato <span class="math inline">(\bar{x}_i, \bar{y}_i)</span></p>
+<p>Buscamos los parámetros <span class="math inline">\Theta</span> que minimicen el error promedio sobre los datos, es decir:</p>
+<p><span class="math display">J(\Theta) = \frac{1}{n} \sum_{i =1}^n e_i</span></p>
+<section id="descenso-del-gradiente" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="descenso-del-gradiente"><span class="header-section-number">5.1.1</span> Descenso del Gradiente</h3>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span>, <span class="math inline">\Theta \in \mathbb{R}^d</span> parámetros, <span class="math inline">J(\Theta) = \frac{1}{n} \sum_{i =1}^n e_i</span></p>
+<ul>
+<li>Comenzamos en un vector <span class="math inline">\Theta_0 \in \mathbb{R}^d</span></li>
+<li>En cada iteración, actualizamos cada parámetro <span class="math inline">\theta\in \Theta</span> según la regla:</li>
+</ul>
+<p><span class="math display">\theta_{k+1}\leftarrow \theta_k- \eta \frac{\partial J}{\partial \theta} (\Theta_k))</span></p>
+<p>Donde <span class="math inline">\eta</span> la tasa de aprendizaje</p>
+<ul>
+<li>Nos detenemos según un criterio de parada</li>
+</ul>
+<p><em>¿Algún problema con este método?</em></p>
+<ul>
+<li>Si hay muchos datos (<span class="math inline">n</span> es grande) puede ser costoso calcular <span class="math inline">J</span> y sus derivadas</li>
+</ul>
+</section>
+<section id="descenso-del-gradiente-estocástico" class="level3 page-columns page-full" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="descenso-del-gradiente-estocástico"><span class="header-section-number">5.1.2</span> Descenso del gradiente estocástico</h3>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span>, <span class="math inline">\Theta \in \mathbb{R}^d</span> parámetros, <span class="math inline">J(\Theta) = \frac{1}{n} \sum_{i =1}^n e_i</span></p>
+<ul>
+<li>Comenzamos en un vector <span class="math inline">\Theta_0 \in \mathbb{R}^d</span></li>
+<li>En cada iteración, escogemos un dato <span class="math inline">(\bar{x}_i, \bar{y}_i)</span> y actualizamos cada parámetro <span class="math inline">\theta\in \Theta</span> según la regla:</li>
+</ul>
+<p><span class="math display">\theta_{k+1}\leftarrow \theta_k - \eta \frac{\partial e_i}{\partial \theta} (\Theta_k))</span></p>
+<p>Donde <span class="math inline">\eta</span> la tasa de aprendizaje</p>
+<ul>
+<li>Nos detenemos según un criterio de parada</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-965C211A.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplo gráfico del descenso de gradiente estocástico</figcaption><p></p>
+</figure>
+</div>
+<p><em>¿Algún problema con este método?</em></p>
+<ul>
+<li>Más eficiente</li>
+<li>Comportamiento de convergencia más impredecible</li>
+</ul>
+</section>
+<section id="descenso-del-gradiente-mini-batch" class="level3 page-columns page-full" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="descenso-del-gradiente-mini-batch"><span class="header-section-number">5.1.3</span> Descenso del gradiente mini-batch</h3>
+<p>Datos <span class="math inline">{(\bar{x}_i, y_i)_{i=n}^n}</span>, <span class="math inline">\Theta \in \mathbb{R}^d</span> parámetros, <span class="math inline">J(\Theta) = \frac{1}{n} \sum_{i =1}^n e_i</span></p>
+<ul>
+<li>Comenzamos en un vector <span class="math inline">\Theta_0 \in \mathbb{R}^d</span></li>
+<li>En cada iteración, escogemos un mini-batch de datos <span class="math inline">\{(\bar{x}_i, \bar{y}_i)_\ell^B\}=1</span> y actualizamos cada parámetro <span class="math inline">\theta \in \Theta</span> según la regla:</li>
+</ul>
+<p><span class="math display">\theta_{k+1}\leftarrow \theta_k - \eta \frac{\partial J'}{\partial \theta} (\Theta_k))</span></p>
+<p><span class="math display">J'(\Theta)= \frac{1}{n}\sum_{\ell=1}^B e_\ell</span> Donde <span class="math inline">\eta</span> la tasa de aprendizaje</p>
+<ul>
+<li>Nos detenemos según un criterio de parada</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-10A2C5DB.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplo gráfico del descenso del gradiente mini-batch</figcaption><p></p>
+</figure>
+</div>
+<p><em>Distintas formas de obtener mini-batch:</em></p>
+<ul>
+<li>Ordenar aleatoriamente los datos e ir extrayendo mini-batches en orden</li>
+</ul>
+<p>Una época se termina cuando visitamos todos los datos Es uno de los métodos más utilizados</p>
+</section>
+<section id="descenso-por-el-gradiente-con-momentum" class="level3 page-columns page-full" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="descenso-por-el-gradiente-con-momentum"><span class="header-section-number">5.1.4</span> Descenso por el gradiente con momentum</h3>
+<p><strong>Idea:</strong></p>
+<p>Para escoger la dirección a movernos desde un punto <span class="math inline">\Theta_0 \in \mathbb{R}^d</span>, no sólo miramos el gradiente actual, sino también cómo nos movimos en el pasado (historia de gradientes pasados)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-C73A896B.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Descenso del gradiente sin momentum y con momentum</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Regla de actualización:</strong></p>
+<p><span class="math display">\bar{v}_k\; \leftarrow(1-\beta)\; \nabla J(\Theta_k)+ \beta\bar{v}_{k-1}</span></p>
+<p>(<span class="math inline">\bar{v}_k</span> es la dirección a movernos que considera el gradiente actual y la historia pasada; se asume <span class="math inline">\bar{v}_{-1}=\bar{0}</span>).</p>
+<p><span class="math display">\Theta_{k+1}\; \leftarrow \Theta_k-\eta\bar{v}_k</span></p>
+<p>En cada paso, <span class="math inline">\bar{v}_k</span> es el promedio exponencial móvil de los gradientes hasta el momento</p>
+<ul>
+<li>Le damos prioridad a los últimos gradientes. La prioridad decae exponencialmente</li>
+<li>Un valor común para <span class="math inline">\beta</span> es 0.9</li>
+</ul>
+<p><span class="math display">\bar{v}_k\;= (1-\beta)\;\nabla J(\Theta_k)+ \beta (1-\beta)\;\nabla J(\Theta_{k-1})+ \\ \beta^2 (1-\beta)\;\nabla J(\Theta_{k-1})+ \dots+ \beta^i (1-\beta)\;\nabla J(\Theta_{k-i})+\dots+ \\\beta^k (1-\beta)\;\nabla J(\Theta_{0})</span> (Si <span class="math inline">\beta</span> = 0.9 e <span class="math inline">i</span> = 100, entonces <span class="math inline">\beta^i (1 − \beta)</span> = 0.00000265613)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-868BD9D4.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación gráfica del efecto de aplicar momentun y no, mediante vectores</figcaption><p></p>
+</figure>
+</div>
+<p>En cada paso, <span class="math inline">\bar{v}_k</span> es el <strong>promedio exponencial móvil</strong> de los gradientes hasta el momento - Le damos prioridad a los últimos gradientes. La prioridad decae exponencialmente - Un valor común para <span class="math inline">\beta</span> es 0.9</p>
+<p>Regla de actualización:</p>
+<p><span class="math display">v_k\; \leftarrow(1-\beta)\;\frac{\partial J}{\partial \theta}(\Theta_k)+ \beta v_{k-1}</span></p>
+<p><span class="math display">\Theta_{k+1}\; \leftarrow \Theta_k-\eta v_k</span></p>
+<p>Regla de actualización (otra opción):</p>
+<p><span class="math display">\bar{v}_k\; \leftarrow \beta\bar{v}_{k-1} -(1-\beta)\; \nabla J(\Theta_k)</span></p>
+<p><span class="math display">v_k\; \leftarrow  \beta v_{k-1}-(1-\beta)\;\frac{\partial J}{\partial \theta}(\Theta_k)</span></p>
+</section>
+<section id="descenso-por-el-gradiente-con-momentum-nesterov" class="level3 page-columns page-full" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="descenso-por-el-gradiente-con-momentum-nesterov"><span class="header-section-number">5.1.5</span> Descenso por el gradiente con momentum + Nesterov</h3>
+<p><strong>Idea:</strong></p>
+<p>En vez de mirar los gradientes pasados y el gradiente en el punto actual, miramos los gradientes pasados y el gradiente en un punto futuro, según el momentum</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-7FE31DED.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación gráfica del Descenso por el gradiente con momentum + Nesterov</figcaption><p></p>
+</figure>
+</div>
+<p><img src="images/paste-7413C5E7.png" class="img-fluid" width="720"></p>
+</section>
+</section>
+<section id="métodos-adaptativos-adagrad-rmsprop-adam" class="level2 page-columns page-full" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="métodos-adaptativos-adagrad-rmsprop-adam"><span class="header-section-number">5.2</span> Métodos adaptativos: AdaGrad, RMSProp, Adam</h2>
+<p><strong>Idea</strong> Queremos una tasa de aprendizaje adaptativa, que cambie en el tiempo</p>
+<section id="adagrad" class="level3 page-columns page-full" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="adagrad"><span class="header-section-number">5.2.1</span> AdaGrad</h3>
+<ul>
+<li>Idea: Avanzar de manera uniforme en todas las dimensiones (parámetros)</li>
+<li>Normalizamos la tasa <span class="math inline">eta</span> por la historia de los gradientes (sus cuadrados)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-D92F6310.png" class="img-fluid figure-img" width="570"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación gráfica de AdaGrad</figcaption><p></p>
+</figure>
+</div>
+<p>Regla de actualización (por parámetro):</p>
+<p><span class="math display">r_k = \leftarrow r_{k-1}+ \frac{\partial J}{\partial\theta}(\Theta_k)^2</span></p>
+<p>(<span class="math inline">r_k</span> almacena la suma de los cuadrados de todos los gradientes)</p>
+<p><span class="math display">\theta_{k+1}  \leftarrow \theta_k - \frac{\eta}{\sqrt{r_k}} \cdot \frac{\partial J}{\partial\theta}(\Theta_k)</span></p>
+</section>
+<section id="rmsprop" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="rmsprop"><span class="header-section-number">5.2.2</span> RMSProp:</h3>
+<ul>
+<li>Idea: Avanzar de manera uniforme en todas las dimensiones (parámetros)</li>
+<li>Normalizamos la tasa <span class="math inline">\eta</span> por el promedio exponencial móvil de los cuadrados de los gradientes</li>
+</ul>
+<p>Regla de actualización (por parámetro):</p>
+<p><span class="math display">s_k = \leftarrow \beta s_{k-1}+ (1-\beta)\frac{\partial J}{\partial\theta}(\Theta_k)^2</span> <span class="math display">\theta_{k+1}  \leftarrow \theta_k - \frac{\eta}{\sqrt{s_k}} \cdot \frac{\partial J}{\partial\theta}(\Theta_k)</span></p>
+</section>
+<section id="adam" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="adam"><span class="header-section-number">5.2.3</span> Adam:</h3>
+<p>Idea: Combinar descenso con momentum y RMSProp</p>
+<p>Regla de Actualización</p>
+<p><span class="math display">v_k \leftarrow \beta_1 v_{k-1}- (1-\beta_1)\frac{\partial J}{\partial\theta}(\Theta_k)</span></p>
+<p><span class="math display">s_k  \leftarrow \beta_2 s_{k-1}+ (1-\beta_2)\frac{\partial J}{\partial\theta}(\Theta_k)^2</span> <span class="math display">v'_k  \leftarrow \frac{v_k}{1-(\beta_1)^k}</span> <span class="math display">s'_k  \leftarrow \frac{s_k}{1-(\beta_2)^k}</span></p>
+<p><span class="math display">\theta_{k+1}  \leftarrow \theta_k + \frac{\eta}{\sqrt{s'_k}} \cdot v'_k   </span></p>
+<p>Típicamente, <span class="math inline">\beta1 = 0.9</span>, <span class="math inline">\beta2 = 0.999</span>, <span class="math inline">\eta = 0.001</span></p>
+</section>
+</section>
+<section id="regularización" class="level2 page-columns page-full" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="regularización"><span class="header-section-number">5.3</span> Regularización</h2>
+<p>Idea:</p>
+<ul>
+<li>Agregar un término de penalización para obtener soluciones “simples”</li>
+</ul>
+<p>En Machine Learning:</p>
+<ul>
+<li>Obtener modelos más simples
+<ul>
+<li>Parámetros más pequeños o menos parámetros (modelo sparse)</li>
+</ul></li>
+<li>Modelos simples ayudan a evitar <strong>overfitting</strong></li>
+</ul>
+<section id="regularización-ell_2" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="regularización-ell_2"><span class="header-section-number">5.3.1</span> Regularización <span class="math inline">\ell_2</span></h3>
+<p>Idea: - Favorecer soluciones con parámetros pequeños</p>
+<p>En vez de minimizar <span class="math inline">J(Θ)</span>, minimizamos:</p>
+<p><span class="math display">\tilde{J}(\Theta) = J(\Theta)  + \alpha\|\Theta\|_2^2</span></p>
+<p>Donde <span class="math inline">|\Theta\|_2 = \sqrt{\sum_{i=1}^m \theta_i^2}</span> para <span class="math inline">\Theta = (\theta_1, \dots, \theta_m)</span></p>
+<ul>
+<li>El término <span class="math inline">\apha</span> mide cuánto peso tiene la regularización</li>
+<li>El término <span class="math inline">\alpha\|\Theta\|_2^2</span> es diferenciable luego podemos aplicar las variantes de descenso del gradiente</li>
+</ul>
+<p>(notar <span class="math inline">\nabla\alpha \|\Theta\|_2^2= 2\alpha\Theta</span>)</p>
+<p>Caso de Regresión Lineal minimizamos:</p>
+<p><span class="math display">\tilde{J}=\frac{1}{n}\sum_{i=1}^{n} (\Theta^T\bar{x}_i- y_i)^2+ \alpha\|\Theta\|_2^2</span></p>
+<p>Esto se llama <strong>Ridge Regression</strong></p>
+<p>Regla del gradiente:</p>
+<p><span class="math display">\Theta \leftarrow \Theta-\eta\; \left(\frac{2}{n}X^T(X\Theta-\bar{y})+2\alpha\Theta\right)</span></p>
+<p>Forma Alternativa:</p>
+<p><span class="math display">\Theta \leftarrow \Theta-\eta\; \frac{2}{n}X^T(X\Theta-\bar{y})+2\eta\alpha\Theta</span> <span class="math display">\Theta \leftarrow (1-2\eta\alpha)\Theta-\eta \frac{2}{n}X^T(X\Theta-\bar{y})</span> Es decir, la regla normal con <span class="math inline">\beta</span> extra:</p>
+<p><span class="math display">\Theta \leftarrow \beta \Theta-\eta\; \frac{2}{n}X^T(X\Theta-\bar{y})</span></p>
+</section>
+<section id="regularización-ell_1" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="regularización-ell_1"><span class="header-section-number">5.3.2</span> Regularización <span class="math inline">\ell_1</span></h3>
+<p>Idea:</p>
+<ul>
+<li>Favorecer soluciones con menos parámetros</li>
+</ul>
+<p>En vez de minimizar <span class="math inline">J(Θ)</span>, minimizamos:</p>
+<p><span class="math display">\tilde{J}(\Theta) = J(\Theta)  + \alpha\|\Theta\|_1</span></p>
+<p>Donde <span class="math inline">|\Theta\|_1 = \sum_{i=1}^m |\theta_i|</span> para <span class="math inline">\Theta = (\theta_1, \dots, \theta_m)</span></p>
+<p>¿ Cuánto es <span class="math inline">\nabla\alpha\|\Theta\|_1</span> ?</p>
+$$=
+<span class="math display">\begin{cases}
+
+
+      1, &amp; \text{si } \theta &gt; 0 \\
+      -1, &amp; \text{si } \theta &lt; 0
+    \end{cases}</span>
+<p>$$</p>
+<p>Para implementar descenso por el gradientes es común asumir:</p>
+$$=
+<span class="math display">\begin{cases}
+
+
+1, &amp; \text{si } \theta &gt; 0 \\
+0, &amp; \text{si } \theta = 0 \\
+-1, &amp; \text{si } \theta &lt; 0 \end{cases}</span>
+<p>$$</p>
+<p><span class="math inline">\nabla\alpha\|\Theta\|_1= \alpha \text{ sing}(\Theta)</span></p>
+$$()=
+<span class="math display">\begin{cases}
+
+
+      1, &amp; \text{si } \theta &gt; 0 \\
+      0, &amp; \text{si } \theta = 0 \\
+      -1, &amp; \text{si } \theta &lt; 0 \end{cases}</span>
+<p>$$ En el caso de Regresión Lineal esto se llama <strong>Lasso Regression</strong></p>
+</section>
+<section id="ridge-vs-lasso" class="level3 page-columns page-full" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="ridge-vs-lasso"><span class="header-section-number">5.3.3</span> Ridge vs Lasso</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-9C5D7D0B.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación Gráfica Ridge vs Lasso</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="combinando-ell_1-y-ell_2" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="combinando-ell_1-y-ell_2"><span class="header-section-number">5.3.4</span> Combinando <span class="math inline">\ell_1</span> y <span class="math inline">\ell_2</span></h3>
+<p>Podemos combinar las dos técnicas anteriores y minimizar:</p>
+<p><span class="math display">\tilde{J}(\Theta) = J(\Theta)  + ra\|\Theta\|_1 +(1-r)a\|\Theta\|_2^2</span></p>
+<p>donde $0 ≤ r ≤ 1 $es un parámetro</p>
+<p>En el caso de Regresión Lineal esto se llama **Elastic Net^^</p>
+</section>
+</section>
+<section id="referencias" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="referencias"><span class="header-section-number">5.4</span> Referencias</h2>
+<p><a href="https://www.knowledgeisle.com/wp-content/uploads/2019/12/2-Aurélien-Géron-Hands-On-Machine-Learning-with-Scikit-Learn-Keras-and-Tensorflow_-Concepts-Tools-and-Techniques-to-Build-Intelligent-Systems-O’Reilly-Media-2019.pdf">Book: Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow - Aurélien Géro</a></p>
+<p><a href="https://www.youtube.com/watch?v=mwHiaTrQOiI">Video: Descenso de Gradiente. Cómo Aprenden las Redes Neuronales | Aprendizaje Profundo. Capítulo 2</a></p>
+<p><a href="http://neuralnetworksanddeeplearning.com">Book: Neural Networks and Deep Learning - Michael Nielsen</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./iterativos.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

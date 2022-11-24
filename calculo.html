@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Algrebra Lineal y Optimización - 3&nbsp; Cálculo y Optimización</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./iterativos.html" rel="next">
+<link href="./matrices.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Algrebra Lineal y Optimización</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vectores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Vectores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrices.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculo.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./iterativos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gradient_desc.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descenso del Gradiente</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#derivada" id="toc-derivada" class="nav-link active" data-scroll-target="#derivada"> <span class="header-section-number">3.1</span> Derivada</a>
+  <ul class="collapse">
+  <li><a href="#derivada-ejemplos-y-reglas-de-cálculo" id="toc-derivada-ejemplos-y-reglas-de-cálculo" class="nav-link" data-scroll-target="#derivada-ejemplos-y-reglas-de-cálculo"> <span class="header-section-number">3.1.1</span> Derivada: ejemplos y reglas de cálculo</a></li>
+  <li><a href="#derivadas-caso-varias-variables" id="toc-derivadas-caso-varias-variables" class="nav-link" data-scroll-target="#derivadas-caso-varias-variables"> <span class="header-section-number">3.1.2</span> Derivadas: caso varias variables</a></li>
+  <li><a href="#derivadas-parciales" id="toc-derivadas-parciales" class="nav-link" data-scroll-target="#derivadas-parciales"> <span class="header-section-number">3.1.3</span> Derivadas parciales</a></li>
+  </ul></li>
+  <li><a href="#gradiente-propiedades" id="toc-gradiente-propiedades" class="nav-link" data-scroll-target="#gradiente-propiedades"> <span class="header-section-number">3.2</span> Gradiente: Propiedades</a>
+  <ul class="collapse">
+  <li><a href="#hessiano-matriz" id="toc-hessiano-matriz" class="nav-link" data-scroll-target="#hessiano-matriz"> <span class="header-section-number">3.2.1</span> Hessiano (matriz)</a></li>
+  <li><a href="#derivada-varias-variables-a-varias-variables" id="toc-derivada-varias-variables-a-varias-variables" class="nav-link" data-scroll-target="#derivada-varias-variables-a-varias-variables"> <span class="header-section-number">3.2.2</span> Derivada: varias variables a varias variables</a></li>
+  </ul></li>
+  <li><a href="#puntos-estacionarios" id="toc-puntos-estacionarios" class="nav-link" data-scroll-target="#puntos-estacionarios"> <span class="header-section-number">3.3</span> Puntos Estacionarios</a></li>
+  <li><a href="#convexidad-y-concavidad" id="toc-convexidad-y-concavidad" class="nav-link" data-scroll-target="#convexidad-y-concavidad"> <span class="header-section-number">3.4</span> Convexidad y concavidad</a>
+  <ul class="collapse">
+  <li><a href="#convexidad-caso-varias-variables" id="toc-convexidad-caso-varias-variables" class="nav-link" data-scroll-target="#convexidad-caso-varias-variables"> <span class="header-section-number">3.4.1</span> Convexidad: caso varias variables</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cálculo y Optimización</span></h1>
+<p class="subtitle lead">Conceptos Básicos</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="derivada" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="derivada"><span class="header-section-number">3.1</span> Derivada</h2>
+<p>Supongamos que tenemos una función en una variable <span class="math inline">f : \mathbb{R} → \mathbb{R}</span>.</p>
+<p>La derivada de f en un punto <span class="math inline">x</span> <span class="math inline">\in</span> <span class="math inline">\mathbb{R}</span> es:</p>
+<ul>
+<li>La razón de cambio de de <span class="math inline">f</span> entorno a <span class="math inline">x</span></li>
+</ul>
+<p><span class="math display">cambio = \frac{f(x+h)-f(x)}{h}</span> (en este caso <span class="math inline">h &lt; 0</span>)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-52637D20.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">La derivada de f en un punto <span class="math inline">x</span> <span class="math inline">\in</span> <span class="math inline">\mathbb{R}</span></figcaption><p></p>
+</figure>
+</div>
+<p>Formalmente:</p>
+<p><span class="math display">f'(x)= \lim_{h \to 0}\frac{f(x+h)-f(x)}{h}</span></p>
+<p>Pendiente de la recta tangente al grafo de <span class="math inline">f</span> en el punto <span class="math inline">f(x)</span></p>
+<p>La <strong>derivada nos da la mejor aproximación lineal</strong> de <span class="math inline">f</span> entorno a <span class="math inline">x</span></p>
+<p><span class="math display">f(x + h) ≈ f(x) + f'(x)h</span></p>
+<p>Observaciones:</p>
+<ul>
+<li>La derivada <span class="math inline">f'(x)</span> no siempre existe</li>
+<li>Si existe decimos que f es derivable en <span class="math inline">x</span></li>
+<li>Si <span class="math inline">f</span> es derivable en <span class="math inline">x</span>, entonces es continua en <span class="math inline">x</span></li>
+<li>Si <span class="math inline">f</span> es derivable en todo <span class="math inline">x \in \mathbb{R}</span>, decimos que <span class="math inline">f</span> es derivable</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-8F5BA236.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplos de funciones derivables y no</figcaption><p></p>
+</figure>
+</div>
+<section id="derivada-ejemplos-y-reglas-de-cálculo" class="level3 page-columns page-full" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="derivada-ejemplos-y-reglas-de-cálculo"><span class="header-section-number">3.1.1</span> Derivada: ejemplos y reglas de cálculo</h3>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-301B12F5.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejemplos de Derivadas y reglas de cálculo</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Regla de la cadena</strong>: Si <span class="math inline">f(x) = h(g(x))</span> entonces <span class="math inline">f'(x) = h'(g(x)) \cdot g'(x)</span></p>
+<p>Ejemplo 1:</p>
+<p><span class="math display">(2ln(x^3)+e^x x^2+7)'</span></p>
+<p><span class="math display">2\frac{1}{x^3}3x^2+e^x x^2+e^x2x</span> <span class="math display">\frac{6x^2}{x^3}+e^x x^2+2^x x</span> <span class="math display">\frac{6x}{x}+e^x x^2+2^x x</span></p>
+<p>Ejemplo 2:</p>
+<p><span class="math display">f(x)= (5x^4-6x^3+x)^5</span></p>
+<p><span class="math display">f'(x)= 5(5x^4-6x^3+x)^4 \cdot (20x^3-18x^2+1)</span></p>
+<p><span class="math display">f'(x)= (5x^4-6x^3+x)^4 \cdot (100x^3-90x^2+5)</span></p>
+</section>
+<section id="derivadas-caso-varias-variables" class="level3 page-columns page-full" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="derivadas-caso-varias-variables"><span class="header-section-number">3.1.2</span> Derivadas: caso varias variables</h3>
+<p>Ahora tenemos una función <span class="math inline">f : \mathbb{R}^n \to \mathbb{R}</span> con n variables ¿ Cómo definimos la derivada entorno a <span class="math inline">\bar{x}\in \mathbb{R}^n</span> ? Igual que antes pero necesitamos fijar una dirección para movernos</p>
+<ul>
+<li>La dirección estará dada por un vector <span class="math inline">\bar{v} \in \mathbb{R}^n</span> (y la recta que define)</li>
+</ul>
+<p>Definimos la <strong>derivada</strong> direccional de <span class="math inline">f</span> entorno a <span class="math inline">\bar{x}</span> en dirección <span class="math inline">\bar{v}</span> como:</p>
+<p><span class="math display">\nabla f'(\bar{x})= \lim_{h \to 0}\frac{f(\bar{x}+h\bar{v})-f(\bar{x})}{h}</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-E3DFF3B8.png" class="img-fluid figure-img" width="220"></p>
+<p></p><figcaption class="figure-caption margin-caption">Derivada direccional</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="derivadas-parciales" class="level3 page-columns page-full" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="derivadas-parciales"><span class="header-section-number">3.1.3</span> Derivadas parciales</h3>
+<dl>
+<dt>Definición General:</dt>
+<dd>
+<p>Una derivada parcial de una función de varia variables es su derivada respecto a una de esas variables con las otras mandeniéndose constantes. Las derivadas parciales son útiles en el cálculo vectorial y geometría diferencial.</p>
+</dd>
+</dl>
+<p>Ejemplo:</p>
+<p><span class="math display">f(x, y)=3x^2+5xy-7y^2+1</span> <span class="math display">\frac{\partial f}{\partial x}=6x+5y \cdot 1-0+0</span></p>
+<p><span class="math display">\frac{\partial f}{\partial x}=6x+5y</span> Las <span class="math inline">y</span> se tratan como constantes y al derivarlas es cero.</p>
+<p>La derivada parcial respecto a <span class="math inline">y</span></p>
+<p><span class="math display">\frac{\partial f}{\partial y}=0+5x \cdot 1+7\cdot 2y+0</span> <span class="math display">\frac{\partial f}{\partial y}=5x+14y</span></p>
+<p>Si <span class="math inline">f : \mathbb{R}^n \to \mathbb{R}</span> está dada por n variables, definimos la <strong>derivada parcial</strong> de <span class="math inline">f</span> entorno a <span class="math inline">\bar{x} = (x_1, ..., x_n)</span> con respecto a la variables <span class="math inline">x_i</span> como la derivada direccional con dirección el vector canónico <span class="math inline">\bar{e}_i</span></p>
+<p>De manera equivalente, podemos definir la derivada parcial como:</p>
+<p><span class="math display">\frac{\partial f}{\partial x_i}(x_1, ..., x_n)= \lim_{h \to 0} \frac{f(x_1, ..., x_i+h, ...,x_n)-f(x_1,...,x_i, ..., x_n)}{h}</span></p>
+<p>Definimos el gradiente como <span class="math inline">\nabla f : \mathbb{R}^n \to \mathbb{R}^n</span></p>
+<p><img src="images/paste-1361835E.png" class="img-fluid" width="720"></p>
+<p>Ejercicios:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-EC28CEDE.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Ejercicios de Derivadas parciales</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="gradiente-propiedades" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="gradiente-propiedades"><span class="header-section-number">3.2</span> Gradiente: Propiedades</h2>
+<p><img src="images/paste-2AFB7248.png" class="img-fluid" width="720"></p>
+<ul>
+<li><span class="math inline">\nabla</span>: Derivada Direccional</li>
+</ul>
+<p>Se pretende encontrar la dirección con la derivada direccional</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-F252D083.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">derivada direccional</figcaption><p></p>
+</figure>
+</div>
+<section id="hessiano-matriz" class="level3 page-columns page-full" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="hessiano-matriz"><span class="header-section-number">3.2.1</span> Hessiano (matriz)</h3>
+<p>En matemática, la matriz hessiana de una función escalar o campo escalar <span class="math inline">f</span> de <span class="math inline">n</span> variables, es la matriz cuadrada de tamaño <span class="math inline">n \times n</span>, de las segundas derivadas parciales. (<a href="https://es.wikipedia.org/wiki/Matriz_hessiana">wikipedia</a>)</p>
+<p>Aplicación de la matriz hessiana:</p>
+<ul>
+<li>Concavidad/Convexidad</li>
+<li>Método para determinar el carácter de los puntos críticos (máximos, mínimos y puntos de inflexión o silla o de ensilladura)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-5D59042F.png" class="img-fluid figure-img" width="720"></p>
+<p></p><figcaption class="figure-caption margin-caption">Matriz hessiana</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-EDC3ACB5.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Dirección de la función</figcaption><p></p>
+</figure>
+</div>
+<p>Referencias: <a href="https://es.khanacademy.org/math/multivariable-calculus/applications-of-multivariable-derivatives/quadratic-approximations/a/the-hessian">khanacademy: Hessiano</a></p>
+</section>
+<section id="derivada-varias-variables-a-varias-variables" class="level3 page-columns page-full" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="derivada-varias-variables-a-varias-variables"><span class="header-section-number">3.2.2</span> Derivada: varias variables a varias variables</h3>
+<p>Sea <span class="math inline">f : R^n \to R^m</span> una función dada por las funciones coordenadas <span class="math inline">f = (f_1,..., f_m)</span>, para funciones <span class="math inline">f_i : R^n \to R</span></p>
+<p>Definimos el <strong>Jacobiano</strong> de <span class="math inline">f</span> entorno a <span class="math inline">\bar{x}</span> como la matriz de <span class="math inline">m \times n</span>:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-9399028F.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Jacobiano</figcaption><p></p>
+</figure>
+</div>
+<dl>
+<dt>Observación:</dt>
+<dd>
+<p>Nuevamente el Jacobiano nos da la mejor aproximación lineal entorno a <span class="math inline">\bar{x}</span></p>
+</dd>
+</dl>
+<p><span class="math display">f ( \bar{x} + \bar{h}) \approx f ( \bar{x}) + J_f ( \bar{x} ) \bar{h}</span></p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-D7085C18.png" class="img-fluid figure-img" width="220"></p>
+<p></p><figcaption class="figure-caption margin-caption">Representación de la aproximación</figcaption><p></p>
+</figure>
+</div>
+<dl>
+<dt>Observación:</dt>
+<dd>
+<p>El Hessiano de una función <span class="math inline">f : \mathbb{R}^n \to \mathbb{R}</span> es el Jacobiano del gradiente <span class="math inline">\nabla f</span></p>
+</dd>
+<dt>Jacobiano:</dt>
+<dd>
+<p>En cálculo vectorial, la matriz Jacobiana de una función vectorial de varias variables es la matriz cuyos elementos son las derivadas parciales de primer orden de dicha función. <a href="https://es.wikipedia.org/wiki/Matriz_y_determinante_jacobianos">Wikipedia</a></p>
+</dd>
+</dl>
+<p>Referencias: <a href="https://es.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/jacobian/v/jacobian-prerequisite-knowledge">khanacademy: Jacobiano</a></p>
+<p><strong>Ejercicios</strong></p>
+<p><img src="images/paste-D7EEE13A.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="puntos-estacionarios" class="level2 page-columns page-full" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="puntos-estacionarios"><span class="header-section-number">3.3</span> Puntos Estacionarios</h2>
+<p>Supongamos que <span class="math inline">f : \mathbb{R} \to \mathbb{R}</span> es derivable. Decimos que <span class="math inline">x \in \mathbb{R}</span> es un punto estacionario si <span class="math inline">f'(x) = 0</span>. Un punto estacionario puede ser:</p>
+<ul>
+<li>Maximizador global</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-F6953EDB.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función gráfica: Maximizador global</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Maximizador local</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-7F20F328.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función gráfica: Maximizador local</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Minimizador global</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-BE72A797.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función gráfica: Minimizador global</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Minimizador local</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-C5F560BE.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función gráfica: Minimizador local</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Punto Silla</li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-4CCFCFE5.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función gráfica: Punto Silla</figcaption><p></p>
+</figure>
+</div>
+<p>Podemos diferenciar entre un maximizador y un minimizador con <span class="math inline">f'</span>:</p>
+<p>Si <span class="math inline">f′</span> cambia de signo en <span class="math inline">x</span> de + a - <span class="math inline">\to x</span> es maximizador (local o global)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-B21B5864.png" class="img-fluid figure-img" width="130"></p>
+<p></p><figcaption class="figure-caption margin-caption">Si <span class="math inline">f′</span> cambia de signo en <span class="math inline">x</span> de + a - <span class="math inline">\to x</span> es maximizador (local o global)l)</figcaption><p></p>
+</figure>
+</div>
+<p>Si <span class="math inline">f′</span> cambia de signo en x de - a + <span class="math inline">\to x</span> es minimizador (local o global)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-35EEF348.png" class="img-fluid figure-img" width="115"></p>
+<p></p><figcaption class="figure-caption margin-caption">Si <span class="math inline">f'</span> cambia de signo en x de - a + <span class="math inline">\to x</span> es minimizador (local o global)</figcaption><p></p>
+</figure>
+</div>
+<p>Podemos diferenciar entre un maximizador y un minimizador usando la segunda derivada <span class="math inline">f''(x)</span> si existe:</p>
+<p>$f′′(x) &lt; 0 ⇒ x $ es maximizador (local o global)</p>
+<p>$f′′(x) &gt; 0 ⇒ x $ es minimizador (local o global)</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/derivada_min_max.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Diferenciar entre un maximizador y un minimizador</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Ejercicios</strong></p>
+<ul>
+<li><p>¿Qué pasa con <span class="math inline">f′′(x)</span> para el caso de punto silla?</p>
+<p>R: Si</p>
+<p><img src="images/paste-40243A1E.png" class="img-fluid" width="420"></p></li>
+<li><p>¿Es cierto que si f′′(x) = 0 entonces el punto estacionario es silla?</p>
+<p>R: No siempre</p></li>
+</ul>
+<p><img src="images/paste-0FAB6656.png" class="img-fluid" width="520"></p>
+</section>
+<section id="convexidad-y-concavidad" class="level2 page-columns page-full" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="convexidad-y-concavidad"><span class="header-section-number">3.4</span> Convexidad y concavidad</h2>
+<p>Decimos que una función <span class="math inline">f : \mathbb{R} \to \mathbb{R}</span> es convexa si para todo <span class="math inline">x, y \in \mathbb{R}</span> y <span class="math inline">a \in (0,1)</span></p>
+<p><span class="math display">f(ax + (1 − a)y) ≤ af(x) + (1 − a)f(y)</span></p>
+<ul>
+<li><p><span class="math inline">f</span> es estrictamente convexa si la desigualdad anterior es estricta &lt;</p></li>
+<li><p>$f$ es cóncava si se cumple lo de arriba pero con <span class="math inline">≥</span> en vez de <span class="math inline">≤</span>,</p></li>
+<li><p>y es estrictamente cóncava si se cumple con <span class="math inline">&gt;</span></p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-A5ABF331.png" class="img-fluid figure-img" width="520"></p>
+<p></p><figcaption class="figure-caption margin-caption">Función estricatamente convexa</figcaption><p></p>
+</figure>
+</div>
+<p>Ejemplo: - Toda función lineal <span class="math inline">f(x) = cx + d</span> es convexa y cóncava (se cumple la desigualdad con =) - <span class="math inline">f(x) = x^2</span> es estrictamente convexa</p>
+<p><em>Observaciones (análogo para concavidad):</em></p>
+<ul>
+<li><p>Si <span class="math inline">f</span> tiene segunda derivada <span class="math inline">f′′</span> entonces <span class="math inline">f</span> es convexa <span class="math inline">⇔ f'' ≥ 0</span></p></li>
+<li><p>Si <span class="math inline">f</span> tiene derivada <span class="math inline">f′</span> y es convexa entonces</p>
+<p><span class="math inline">f′(x) = 0 ⇔ x</span> es un minimizador global para <span class="math inline">f</span></p></li>
+<li><p>Si f es además estrictamente convexa entonces hay un único minimizador (el cual es global)</p></li>
+</ul>
+<p>Ejercicios</p>
+<ol type="a">
+<li>Suponga f1 y f2 son funciones convexas de <span class="math inline">\mathbb{R}</span> a <span class="math inline">\mathbb{R}</span>, ¿es cierto que la función <span class="math inline">min{f1, f2}</span> es convexa?</li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-2FCEF4DC.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Solución al ejercicio a)</figcaption><p></p>
+</figure>
+</div>
+<ol start="2" type="a">
+<li>¿Es cierto que la función <span class="math inline">max{f1, f2}</span> es convexa?</li>
+</ol>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/paste-96352562.png" class="img-fluid figure-img" width="420"></p>
+<p></p><figcaption class="figure-caption margin-caption">Solución al ejercicio b)</figcaption><p></p>
+</figure>
+</div>
+<p><strong>Puntos estacionarios de $f : $</strong>^n <span class="math inline">\mathbb{R}</span></p>
+<p>Como en el caso de una variable, tenemos puntos estacionarios donde</p>
+<p><span class="math display">\nabla f(\bar{x})= \bar{0}</span></p>
+<p>Los puntos estacionarios pueden ser minimizadores/maximizadores locales/globales o puntos sillas…</p>
+<section id="convexidad-caso-varias-variables" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="convexidad-caso-varias-variables"><span class="header-section-number">3.4.1</span> Convexidad: caso varias variables</h3>
+<p>Podemos definir convexidad igual que antes:</p>
+<p>Decimos que una función <span class="math inline">f : \mathbb{R} \to \mathbb{R}</span> es convexa si para todo <span class="math inline">x, y \in \mathbb{R}</span> y <span class="math inline">a \in (0,1)</span></p>
+<p><span class="math display">f(ax + (1 − a)y) ≤ af(x) + (1 − a)f(y)</span></p>
+<ul>
+<li><p><span class="math inline">f</span> es estrictamente convexa si la desigualdad anterior es estricta &lt;</p></li>
+<li><p>$f$ es cóncava si se cumple lo de arriba pero con <span class="math inline">≥</span> en vez de <span class="math inline">≤</span>,</p></li>
+<li><p>y es estrictamente cóncava si se cumple con <span class="math inline">&gt;</span></p></li>
+</ul>
+<p><img src="images/paste-C0A3A306.png" class="img-fluid" width="720"></p>
+<p>Seguimos teniendo las buenas propiedades que antes:</p>
+<ul>
+<li><p>Si <span class="math inline">f : \mathbb{R}^n \to \mathbb{R}</span> tiene el Hessiano bien definido entonces: <span class="math inline">Hf</span> es semidefinida positiva ⇔ f es convexa</p></li>
+<li><p>Si <span class="math inline">f : \mathbb{R}^n \to \mathbb{R}</span>es derivable en <span class="math inline">\bar{x}</span> y convexa entonces <span class="math inline">\nabla f(\bar{x}) = \bar{0} ⇔ \bar{x} \in R^n</span> es un minimizador global para <span class="math inline">f</span></p></li>
+<li><p>Si <span class="math inline">f</span> además es estrictamente convexa, existe un <strong>único</strong> minimizador (el cual es global)</p></li>
+</ul>
+<dl>
+<dt>Recordar:</dt>
+<dd>
+Una matriz simétrica A de <span class="math inline">n × n</span> es semidefinida positiva si
+</dd>
+</dl>
+<p><span class="math display">\bar{x}^T A\bar{x} ≥ 0 \  \forall\  \bar{x} \in R^n</span></p>
+<dl>
+<dt>Ojo:</dt>
+<dd>
+el Hessiano (si existe) siempre es una matriz simétrica
+</dd>
+</dl>
+<p><strong>Ejemplo: cuadrados mínimos</strong></p>
+<p>Sea A una matriz de <span class="math inline">n × m</span> y <span class="math inline">\bar{b} \in R^n</span></p>
+<p>Problema de cuadrados mínimos: Buscar <span class="math inline">\bar{x} \in \mathbb{R}^m</span> tal que <span class="math inline">∥A\bar{x} −\bar{b}∥^2</span> sea mínimo</p>
+<p>Observación: La función n <span class="math inline">∥A\bar{x} −\bar{b}∥^2</span> es convexa</p>
+<p><span class="math inline">f: \mathbb{R}^m \to \mathbb{R}</span></p>
+<p><span class="math display">\bar{x} \to ||A\bar{x}-\bar{b}||^2=(A_{1,*}\cdot\bar{x}-b_1+..., A_{n,*}\cdot\bar{x}-b_n)^2</span></p>
+<p><span class="math display">\frac{\partial f}{\partial x_i}= 2(A_{1,*}\cdot\bar{x}-b_1)A_{1, i}+...+2(A_{n,*}\cdot\bar{x}-b_n)A_{n, i}</span></p>
+<p><span class="math display">= 2(A\bar{x}-\bar{b})\cdot A_{*,i}</span></p>
+<p><span class="math display">\nabla f= 2A^T(A\bar{x}-\bar{b})</span></p>
+<p>La ecuación <span class="math inline">\nabla f(\bar{x})=\bar{0}</span> nos da:</p>
+<p><span class="math display">2A^T (A\bar{x}-\bar{b})=\bar{0} \to A^T A\bar{x}=A^T\bar{b}</span></p>
+<p>Si <span class="math inline">2A^T</span> es invertible es convexa</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./matrices.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Matrices</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./iterativos.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Métodos Iterativos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>
